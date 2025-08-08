@@ -82,7 +82,7 @@ public class AuthServiceImpl implements AuthService {
 
  public UserMeDTO updateCurrentUser(Authentication authentication, UserUpdateDTO updateDTO) {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-    User user = userRepository
+        User user = userRepository
         .findByEmail(customUserDetails.getEmail())
         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
@@ -113,4 +113,6 @@ public class AuthServiceImpl implements AuthService {
 
         return new UserMeDTO(user.getEmail(), user.getUsername(), subscriptions);
     }
+
+    
 }
