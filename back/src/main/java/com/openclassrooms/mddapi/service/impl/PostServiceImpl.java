@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.openclassrooms.mddapi.repository.PostRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.service.PostService;
+import com.openclassrooms.mddapi.springSecurity.JwtUtil;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -25,7 +27,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final TopicRepository topicRepository;
     private final UserRepository userRepository;
-
+ @Autowired private JwtUtil jwtUtil;
     public PostServiceImpl(PostRepository postRepository, TopicRepository topicRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.topicRepository = topicRepository;
@@ -34,12 +36,9 @@ public class PostServiceImpl implements PostService {
 
     public void createPost(Authentication authentication, PostCreateDTO dto) {
 
+   User authUser=   jwtUtil.getUserFromAuthent(authentication);  
 
-          CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
-        User author = userRepository.findByEmail(user.getEmail())
+        User author = userRepository.findByEmail(authUser.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         Topic topic = topicRepository.findById(dto.getTopicId())

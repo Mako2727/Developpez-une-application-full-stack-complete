@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import com.openclassrooms.mddapi.repository.CommentRepository;
 import com.openclassrooms.mddapi.repository.PostRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.service.CommentService;
+import com.openclassrooms.mddapi.springSecurity.JwtUtil;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+      @Autowired private JwtUtil jwtUtil;
 
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
@@ -27,14 +30,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public void addComment(Authentication authentication, Long postId, String content) {
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+        User authUser=   jwtUtil.getUserFromAuthent(authentication);  
 
-
-
-         user = userRepository.findByEmail(user.getEmail())
+       User   user = userRepository.findByEmail(authUser.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         Post post = postRepository.findById(postId)

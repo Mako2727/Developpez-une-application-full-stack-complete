@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.service.TopicService;
+import com.openclassrooms.mddapi.springSecurity.JwtUtil;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 
 
@@ -26,7 +28,7 @@ public class TopicServiceImpl  implements TopicService{
     private final TopicRepository topicRepository;
     private final UserRepository userRepository;
    private final SubscriptionRepository subscriptionRepository;
-
+  @Autowired private JwtUtil jwtUtil;
     public TopicServiceImpl(TopicRepository topicRepository, UserRepository userRepository, SubscriptionRepository subscriptionRepository) {
         this.topicRepository = topicRepository;
         this.userRepository = userRepository;
@@ -34,12 +36,9 @@ public class TopicServiceImpl  implements TopicService{
     }
 
     public List<TopicWithSubscriptionDTO> getAllTopicsWithSubscriptionStatus(Authentication authentication) {
-         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+         User authUser=   jwtUtil.getUserFromAuthent(authentication);  
 
-         user = userRepository.findByEmail(user.getEmail())
+       User  user = userRepository.findByEmail(authUser.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         List<Topic> allTopics = topicRepository.findAll();
@@ -60,11 +59,9 @@ public class TopicServiceImpl  implements TopicService{
 
  public String subscribeUserToTopic(Authentication authentication, Long topicId) {
       String message;
-      CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
-         user = userRepository.findByEmail(user.getEmail())
+       User authUser=   jwtUtil.getUserFromAuthent(authentication);  
+
+       User  user = userRepository.findByEmail(authUser.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         Topic topic = topicRepository.findById(topicId)
@@ -87,12 +84,9 @@ public class TopicServiceImpl  implements TopicService{
     }
 
 public void unsubscribeUserFromTopic(Authentication authentication, Long topicId) {
-   CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+   User authUser=   jwtUtil.getUserFromAuthent(authentication);  
 
-     user = userRepository.findByEmail(user.getEmail())
+       User  user = userRepository.findByEmail(authUser.getEmail())
         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
     Topic topic = topicRepository.findById(topicId)

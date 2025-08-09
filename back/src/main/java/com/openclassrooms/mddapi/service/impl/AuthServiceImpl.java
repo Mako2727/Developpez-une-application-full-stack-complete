@@ -63,12 +63,9 @@ public class AuthServiceImpl implements AuthService {
   }
 
   public UserMeDTO  getCurrentUser(Authentication authentication) {
- CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-    User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+  User authUser=   jwtUtil.getUserFromAuthent(authentication);  
 
-         user = userRepository.findByEmail(user.getEmail())
+       User  user = userRepository.findByEmail(authUser.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         List<String> subscriptions = user.getSubscriptions()
