@@ -98,17 +98,18 @@ public void unsubscribeUserFromTopic(Authentication authentication, Long topicId
     subscriptionRepository.delete(subscription);
 }
 
-public Topic createTopic(Authentication authentication, TopicCreateDTO dto) {
+public String createTopic(Authentication authentication, TopicCreateDTO dto) {
+    String message;
  CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
     User creator = userRepository.findByEmail(customUserDetails.getEmail())
         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
-
-    System.out.println("Nom reçu getNameXXX : " + dto.getDescription());
-    System.out.println("Nom reçu creatorXXX : " + creator.getId());
+  
       Topic topic = new Topic();
         topic.setName(dto.getName());
         topic.setDescription(dto.getDescription());
         topic.setCreator(creator); 
-        return topicRepository.save(topic);
+         topicRepository.save(topic);
+          message="Le Topic vient d etre créé";
+         return message;
 }
 }

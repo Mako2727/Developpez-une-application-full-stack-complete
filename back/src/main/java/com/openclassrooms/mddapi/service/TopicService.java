@@ -12,6 +12,6 @@ public interface TopicService {
     public List<TopicWithSubscriptionDTO> getAllTopicsWithSubscriptionStatus(Authentication authentication);
      public String subscribeUserToTopic(Authentication authentication, Long topicId) ;
     public void unsubscribeUserFromTopic(Authentication authentication, Long topicId) ;
-public Topic createTopic(Authentication authentication, TopicCreateDTO dto);
+public String createTopic(Authentication authentication, TopicCreateDTO dto);
 
 }
