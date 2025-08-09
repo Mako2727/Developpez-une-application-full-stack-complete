@@ -19,6 +19,7 @@ import com.openclassrooms.mddapi.dto.UserUpdateDTO;
 import com.openclassrooms.mddapi.model.CustomUserDetails;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.service.AuthService;
 import com.openclassrooms.mddapi.springSecurity.JwtUtil;
 
 @Service
@@ -63,8 +64,6 @@ public class AuthServiceImpl implements AuthService {
 
   public UserMeDTO  getCurrentUser(Authentication authentication) {
  CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-
-
     User user = userRepository
         .findByEmail(customUserDetails.getEmail())
         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
@@ -81,12 +80,9 @@ public class AuthServiceImpl implements AuthService {
   }
 
  public UserMeDTO updateCurrentUser(Authentication authentication, UserUpdateDTO updateDTO) {
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        User user = userRepository
-        .findByEmail(customUserDetails.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+            User authUser=   jwtUtil.getUserFromAuthent(authentication);       
 
-         user = userRepository.findByEmail(user.getEmail())
+       User   user = userRepository.findByEmail(authUser.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         // Vérifier que le nouvel email n'est pas déjà pris par un autre user

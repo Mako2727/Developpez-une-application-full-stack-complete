@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,10 @@ public class RegisterDTO {
   @NotBlank(message = "L'email est obligatoire")
   private String email;
 
-  @Size(min = 6, message = "Le mot de passe doit contenir au moins 6 caractères")
-  private String password;
+ @Pattern(
+      regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$",
+      message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial"
+    )
+    private String password;
 
 }

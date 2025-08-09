@@ -1,0 +1,17 @@
+package com.openclassrooms.mddapi.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.openclassrooms.mddapi.model.Post;
+import com.openclassrooms.mddapi.model.Topic;
+
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
+
+    // Récupère tous les posts d'une liste de topics, triés du plus récent au plus ancien
+    List<Post> findByTopicInOrderByCreatedAtDesc(List<Topic> topics);
+    List<Post> findByTopicInOrderByCreatedAtAsc(List<Topic> topics);
+}

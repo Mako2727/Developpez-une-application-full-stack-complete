@@ -41,7 +41,6 @@ public class Comment {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
-        updatedAt = createdAt;
     }
 
     @PreUpdate

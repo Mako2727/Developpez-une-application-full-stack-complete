@@ -20,7 +20,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Topic {
-     @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -28,6 +29,10 @@ public class Topic {
     private String name;
 
     private String description;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "creator_id", nullable = false)
+    private User creator;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -41,12 +46,10 @@ public class Topic {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
-        updatedAt = createdAt;
     }
 
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-    
 }

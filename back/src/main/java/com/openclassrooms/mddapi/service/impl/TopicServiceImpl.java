@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.TopicCreateDTO;
 import com.openclassrooms.mddapi.dto.TopicWithSubscriptionDTO;
 import com.openclassrooms.mddapi.model.CustomUserDetails;
 import com.openclassrooms.mddapi.model.Subscription;
@@ -15,17 +16,18 @@ import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.service.TopicService;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 
 
 @Service
-public class TopicService {
+public class TopicServiceImpl  implements TopicService{
 
     private final TopicRepository topicRepository;
     private final UserRepository userRepository;
    private final SubscriptionRepository subscriptionRepository;
 
-    public TopicService(TopicRepository topicRepository, UserRepository userRepository, SubscriptionRepository subscriptionRepository) {
+    public TopicServiceImpl(TopicRepository topicRepository, UserRepository userRepository, SubscriptionRepository subscriptionRepository) {
         this.topicRepository = topicRepository;
         this.userRepository = userRepository;
         this.subscriptionRepository = subscriptionRepository;
@@ -56,12 +58,12 @@ public class TopicService {
             .collect(Collectors.toList());
     }
 
- public void subscribeUserToTopic(Authentication authentication, Long topicId) {
+ public String subscribeUserToTopic(Authentication authentication, Long topicId) {
+      String message;
       CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userRepository
         .findByEmail(customUserDetails.getEmail())
         .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
-System.out.println("Email extrait de l'authentication : " + user.getEmail());
          user = userRepository.findByEmail(user.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
@@ -71,13 +73,17 @@ System.out.println("Email extrait de l'authentication : " + user.getEmail());
         boolean alreadySubscribed = subscriptionRepository.existsByUserAndTopic(user, topic);
 
         if (alreadySubscribed) {
-            throw new IllegalStateException("Vous êtes déjà abonné à ce thème");
+            //throw new IllegalStateException("Vous êtes déjà abonné à ce thème");
+            message="Vous êtes déjà abonné à ce thème";
+            return message;
         }
 
         Subscription subscription = new Subscription();
         subscription.setUser(user);
         subscription.setTopic(topic);
         subscriptionRepository.save(subscription);
+        message="Vous êtes désormé abonné à ce thème";
+         return message;
     }
 
 public void unsubscribeUserFromTopic(Authentication authentication, Long topicId) {
@@ -96,5 +102,19 @@ public void unsubscribeUserFromTopic(Authentication authentication, Long topicId
         .orElseThrow(() -> new IllegalStateException("Abonnement non trouvé"));
 
     subscriptionRepository.delete(subscription);
+}
+
+public Topic createTopic(Authentication authentication, TopicCreateDTO dto) {
+ CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+    User creator = userRepository.findByEmail(customUserDetails.getEmail())
+        .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+
+    System.out.println("Nom reçu getNameXXX : " + dto.getDescription());
+    System.out.println("Nom reçu creatorXXX : " + creator.getId());
+      Topic topic = new Topic();
+        topic.setName(dto.getName());
+        topic.setDescription(dto.getDescription());
+        topic.setCreator(creator); 
+        return topicRepository.save(topic);
 }
 }

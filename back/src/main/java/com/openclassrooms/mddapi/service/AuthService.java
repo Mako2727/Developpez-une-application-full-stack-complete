@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.service.impl;
+package com.openclassrooms.mddapi.service;
 
 import org.springframework.security.core.Authentication;
 
