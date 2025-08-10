@@ -1,0 +1,19 @@
+
+<img src="/assets/logo_p6.png" alt="logo" style="width:60px; height:40px; object-fit: contain;" />
+<hr>
+
+<div class="register-container">
+  <div class="header-with-back">
+    <span class="back-arrow" (click)="goBack()">←</span>
+    <h2>Se connecter</h2>
+  </div>
+
+  
+  <label for="email">E-mail ou nom d'utilisateur</label>
+  <input id="email" type="email" placeholder="Entrez votre adresse mail" />
+  
+  <label for="password">Mot de passe</label>
+  <input id="password" type="password" placeholder="Entrez votre mot de passe" />
+  
+  <button (click)="login()">Se connecter</button>
+</div>
