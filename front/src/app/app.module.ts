@@ -8,11 +8,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './features/auth/components/register/register.component';
 import { AuthModule } from './features/auth/auth.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MeComponent } from './features/auth/components/me/me.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +23,8 @@ import { AuthModule } from './features/auth/auth.module';
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
-    AuthModule      
+    AuthModule ,
+    HttpClientModule     
   ],
   providers: [],
   bootstrap: [AppComponent],

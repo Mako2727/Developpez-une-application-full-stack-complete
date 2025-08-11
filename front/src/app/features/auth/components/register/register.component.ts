@@ -3,6 +3,10 @@ import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { RegisterRequest } from '../../interfaces/registerRequest.interface';
+import { AuthService } from '../../services/auth.service';
+import { AuthSuccess } from '../../interfaces/authSuccess.interface';
+import { User } from 'src/app/interfaces/user.interface';
+import { LoginRequest } from '../../interfaces/loginRequest.interface'; 
 
 
 @Component({
@@ -12,10 +16,18 @@ import { RegisterRequest } from '../../interfaces/registerRequest.interface';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+    public onError = false;
 
-  constructor(private fb: FormBuilder) {}
+    public form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    name: ['', [Validators.required, Validators.min(3)]],
+    password: ['', [Validators.required, Validators.min(3)]]
+  });
+
+  constructor(private authService: AuthService,private fb: FormBuilder, private sessionService: SessionService,private router: Router,) {}
 
   ngOnInit(): void {
+ 
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -24,13 +36,22 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      // Appel à ton service d'inscription ici
-    }
+      const registerRequest = this.registerForm.value; 
+    this.authService.register(registerRequest).subscribe(
+      (response: AuthSuccess) => {
+        localStorage.setItem('token', response.token);
+        this.authService.me().subscribe((user: User) => {
+          this.sessionService.logIn(user);
+           console.log("Token recu ", response.token )
+          this.router.navigate(['/me'])
+        });
+        this.router.navigate(['/me'])
+      },
+      error => this.onError = true
+    );
   }
 
   goBack(): void {
-    // navigation vers la page précédente
+        this.router.navigate(['/']);
   }
 }
