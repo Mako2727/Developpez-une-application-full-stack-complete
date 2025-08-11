@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginRequest } from '../interfaces/loginRequest.interface';
@@ -6,6 +6,7 @@ import { AuthSuccess  } from '../interfaces/authSuccess.interface';
 import { RegisterRequest } from '../interfaces/registerRequest.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
+import { userMe } from 'src/app/interfaces/userMe.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,12 @@ console.log('URL complète absolue XX:', url);
     return this.httpClient.post<AuthSuccess>(`${this.pathService}api/auth/login`, loginRequest);
   }
 
-  public me(): Observable<User> {
+  public me(): Observable<userMe> {
     const token = localStorage.getItem('token');
 console.log('Token envoyé:', token);
-    return this.httpClient.get<User>(`${this.pathService}api/auth/me`);
+ const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+    return this.httpClient.get<userMe>(`${this.pathService}api/auth/me`, { headers });
   }
 }

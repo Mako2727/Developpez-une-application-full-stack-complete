@@ -1,1 +1,20 @@
-<p>me works!</p>
+<div *ngIf="loading">Chargement en cours...</div>
+<div *ngIf="error">Erreur lors du chargement des informations utilisateur.</div>
+
+<div *ngIf="user">
+  <h2>Profil de {{ user.username }}</h2>
+  <p><strong>Email :</strong> {{ user.email }}</p>
+
+<div *ngIf="user?.subscriptions as subs; else noSubs">
+  <div *ngIf="subs.length > 0; else noSubs">
+    <h3>Abonnements :</h3>
+    <ul>
+      <li *ngFor="let sub of subs">{{ sub }}</li>
+    </ul>
+  </div>
+</div>
+
+  <ng-template #noSubs>
+    <p>Aucun abonnement.</p>
+  </ng-template>
+</div>
