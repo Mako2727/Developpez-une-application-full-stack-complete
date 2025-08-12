@@ -1,20 +1,30 @@
+<div class="header-title">
+  Gestion de l'utilisateur
+</div>
+<hr class="divider" />
+
 <div *ngIf="loading">Chargement en cours...</div>
 <div *ngIf="error">Erreur lors du chargement des informations utilisateur.</div>
 
-<div *ngIf="user">
-  <h2>Profil de {{ user.username }}</h2>
-  <p><strong>Email :</strong> {{ user.email }}</p>
-
-<div *ngIf="user?.subscriptions as subs; else noSubs">
-  <div *ngIf="subs.length > 0; else noSubs">
-    <h3>Abonnements :</h3>
-    <ul>
-      <li *ngFor="let sub of subs">{{ sub }}</li>
-    </ul>
+<form class="profile-form">
+  <div class="form-group">
+    <label for="email">Email</label><br />
+    <input id="email" type="email" [(ngModel)]="email" name="email" />
   </div>
-</div>
+
+  <div class="form-group">
+    <label for="username">Nom d'utilisateur</label><br />
+    <input id="username" type="text" [(ngModel)]="username" name="username" />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Mot de passe</label><br />
+    <input id="password" type="password" [(ngModel)]="password" name="password" placeholder="••••••••" />
+  </div>
+
+  <button (click)="updateProfile()">Mettre à jour</button>
+</form>
 
   <ng-template #noSubs>
     <p>Aucun abonnement.</p>
   </ng-template>
-</div>
