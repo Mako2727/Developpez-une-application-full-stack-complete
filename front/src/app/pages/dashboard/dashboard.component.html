@@ -1,10 +1,13 @@
-<div class="header-bar">
-  <img src="/assets/logo_p6.png" alt="logo" style="width:60px; height:40px; object-fit: contain;" class="logo-left" />
+<mat-toolbar class="custom-toolbar">
+  <img src="../../../assets/logo_p6.png" alt="Logo" height="40" style="margin-right: 16px" />
 
-  <div class="button-group">
-    <button>Se déconnecter</button>
-    <button>Article</button>
-    <button>Thème</button>
-    <img src="assets/profile-logo.png" alt="Profil" class="logo-profile" />
-  </div>
-</div>
+  <span class="spacer"></span>
+
+  <button mat-button>Se déconnecter</button>
+  <button mat-button>Article</button>
+  <button mat-button>Thème</button>
+
+  <button mat-icon-button aria-label="Profil"  (click)="goToProfile()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>

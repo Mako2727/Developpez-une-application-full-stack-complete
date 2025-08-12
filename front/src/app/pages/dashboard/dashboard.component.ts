@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../services/session.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { Router } from '@angular/router';
+
 
 
 
@@ -13,11 +15,15 @@ export class DashboardComponent implements OnInit {
   user: User | null | undefined = null;
   loading = true;
 
-    constructor(private sessionService: SessionService) { }
+    constructor(private sessionService: SessionService,private router: Router) { }
 
   ngOnInit(): void {
      this.user = this.sessionService.user;
     this.loading = false;
+  }
+
+    goToProfile(): void {
+    this.router.navigate(['/me']);  // ou la route que tu veux
   }
 
 }

@@ -11,6 +11,8 @@ import { AuthModule } from './features/auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MeComponent } from './features/auth/components/me/me.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatButtonModule,
     FormsModule,
     AuthModule ,
-    HttpClientModule     
+    HttpClientModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

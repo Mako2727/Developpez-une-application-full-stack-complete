@@ -11,11 +11,15 @@
   height: 40px;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 .button-group {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-left: auto;
+  margin-left: auto; /* pousse à droite */
 }
 
 .button-group button {
@@ -23,13 +27,14 @@
   font-size: 14px;
   cursor: pointer;
   border: none;
-  background-color: transparent;
+  background-color: white; /* fond blanc */
+  color: black; /* texte noir */
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 .button-group button:hover {
-  background-color: #e0e0e0;
+  background-color: #f0f0f0; /* effet hover léger */
 }
 
 .logo-profile {
