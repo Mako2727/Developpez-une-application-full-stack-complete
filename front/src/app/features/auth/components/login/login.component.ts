@@ -42,11 +42,10 @@ export class LoginComponent implements OnInit {
       (response: AuthSuccess) => {
         localStorage.setItem('token', response.token);
         console.log("Token recu ", response.token )
-       /*this.authService.me().subscribe((user: User) => {
+      this.authService.me().subscribe((user: User) => {
           this.sessionService.logIn(user);
-          this.router.navigate(['/rentals'])
-        });*/
-        //this.router.navigate(['/rentals'])
+          this.router.navigate(['/dashboard'])
+        }); 
       },
       error => this.onError = true
     );

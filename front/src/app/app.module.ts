@@ -10,12 +10,14 @@ import { RegisterComponent } from './features/auth/components/register/register.
 import { AuthModule } from './features/auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MeComponent } from './features/auth/components/me/me.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MeComponent
+    MeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

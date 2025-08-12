@@ -1,0 +1,39 @@
+.header-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  gap: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* léger ombrage */
+}
+
+.logo-left {
+  height: 40px;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.button-group button {
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+  background-color: #e0e0e0;
+}
+
+.logo-profile {
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
