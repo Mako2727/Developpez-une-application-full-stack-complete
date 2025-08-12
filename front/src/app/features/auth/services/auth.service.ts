@@ -7,6 +7,7 @@ import { RegisterRequest } from '../interfaces/registerRequest.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
 import { userMe } from 'src/app/interfaces/userMe.interface';
+import { UserUpdate } from '../interfaces/userUpdate.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +35,16 @@ console.log('URL complète absolue XX:', url);
   public me(): Observable<userMe> {
     const token = localStorage.getItem('token');
 console.log('Token envoyé:', token);
- const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
-  });
+ const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
     return this.httpClient.get<userMe>(`${this.pathService}api/auth/me`, { headers });
   }
+
+
+public updateUser(updatedUser: UserUpdate): Observable<userMe> {
+  const token = localStorage.getItem('token');
+  console.log('Token envoyé:', token);
+  console.log('Données UserUpdate à envoyer:', updatedUser); 
+  const headers = new HttpHeaders({'Authorization': `Bearer ${token}` });
+  return this.httpClient.put<userMe>(`${this.pathService}api/auth/me`,updatedUser,  { headers }    );
+}
 }

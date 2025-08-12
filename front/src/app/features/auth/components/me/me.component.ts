@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { UserUpdate } from '../../interfaces/userUpdate.interface';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-me',
@@ -13,12 +16,14 @@ export class MeComponent implements OnInit {
   error = false;
   password: string = ''; // Pour stocker le mot de passe modifié
 
-  constructor(private authService: AuthService) {
+  constructor(private router: Router,private authService: AuthService) {
 
 
   }
   email: string = '';
 username: string = '';
+successMessage: string | null = null;
+errorMessage: string | null = null;
 
   ngOnInit(): void {
      this.authService.me().subscribe({
@@ -48,25 +53,30 @@ username: string = '';
     });
   }
 
-  updateProfile(): void {
-    if (!this.user) return;
+updateProfile(): void {
+  if (!this.user) return;
 
-    // Prépare les données à envoyer, avec mot de passe uniquement s'il est modifié
-    const updatedUser = {
-      email: this.user.email,
-      username: this.user.username,
-      password: this.password ? this.password : undefined,
-    };
+  const updatedUser: UserUpdate = {
+    email: this.email,
+    username: this.username,
+    password: this.password ? this.password : undefined,
+  };
 
-   /* this.authService.updateUser(updatedUser).subscribe({
-      next: () => {
-        alert('Profil mis à jour avec succès !');
-        this.password = ''; // reset champ password
-        this.loadUser(); // recharge les données à jour
-      },
-      error: () => {
-        alert('Erreur lors de la mise à jour du profil.');
-      }
-    });*/
+ this.authService.updateUser(updatedUser).subscribe({
+  next: () => {
+    this.successMessage = 'Mise à jour OK';
+    this.errorMessage = null;  // on efface le message d'erreur
+    this.password = '';
+    this.loadUser();
+  },
+  error: () => {
+    this.errorMessage = 'Mise à jour KO';
+    this.successMessage = null; // on efface le message de succès
+  }
+});
+}
+
+    goBack(): void {
+    this.router.navigate(['dashboard']); 
   }
 }

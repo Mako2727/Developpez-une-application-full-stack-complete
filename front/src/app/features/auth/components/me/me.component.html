@@ -1,3 +1,5 @@
+<button class="back-button" (click)="goBack()">← Retour</button>
+
 <div class="header-title">
   Gestion de l'utilisateur
 </div>
@@ -23,6 +25,8 @@
   </div>
 
   <button (click)="updateProfile()">Mettre à jour</button>
+  <div *ngIf="successMessage" class="message success">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="message error">{{ errorMessage }}</div>
 </form>
 
   <ng-template #noSubs>

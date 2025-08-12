@@ -26,4 +26,11 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/me']);  // ou la route que tu veux
   }
 
+  logOut(): void {
+       this.user = null;
+    localStorage.removeItem('token'); // supprime le token localement
+    this.router.navigate(['']); 
+
+  }
+
 }
