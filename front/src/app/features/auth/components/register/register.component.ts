@@ -43,9 +43,9 @@ export class RegisterComponent implements OnInit {
         this.authService.me().subscribe((user: User) => {
           this.sessionService.logIn(user);
            console.log("Token recu ", response.token )
-          this.router.navigate(['/me'])
+          this.router.navigate(['/dashboard'])
         });
-        this.router.navigate(['/me'])
+        //this.router.navigate(['/me'])
       },
       error => this.onError = true
     );

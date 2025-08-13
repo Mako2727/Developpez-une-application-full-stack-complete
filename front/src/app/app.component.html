@@ -1,1 +1,18 @@
+<mat-toolbar class="custom-toolbar">
+  <img src="../../../assets/logo_p6.png" alt="Logo" height="40" style="margin-right: 16px" />
+
+  <span class="spacer"></span>
+
+  <button mat-button  (click)="logOut()">Se déconnecter</button>
+  <button mat-button routerLink="/article">Article</button>
+  <button mat-button routerLink="/theme">Thème</button>
+
+  <button mat-icon-button aria-label="Profil"  routerLink="/me">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+
+<hr class="toolbar-separator" />
+
+
 <router-outlet></router-outlet>

@@ -69,3 +69,21 @@ $color-violet-dark: #540a85;
     }
   }
 }
+
+.toolbar-separator {
+  border: none;
+  height: 1px;
+  background-color: #ccc; /* couleur de la ligne */
+  margin: 0; /* pas d’espace autour */
+  width: 100%;
+}
+
+.full-width-line {
+  margin: 0;
+  border: none;
+  border-top: 2px solid #ccc;
+  width: 100%;
+}
+.create-article-btn {
+  margin-left: 100px; /* espace par rapport au bord gauche */
+}

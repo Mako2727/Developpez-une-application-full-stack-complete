@@ -13,13 +13,17 @@ import { MeComponent } from './features/auth/components/me/me.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { ArticleComponent } from './pages/article/article.component';
+import { ThemeComponent } from './pages/theme/theme.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MeComponent,
-    DashboardComponent
+    DashboardComponent,
+    ArticleComponent,
+    ThemeComponent
   ],
   imports: [
     BrowserModule,

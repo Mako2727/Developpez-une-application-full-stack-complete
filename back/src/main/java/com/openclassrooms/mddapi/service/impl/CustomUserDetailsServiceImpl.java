@@ -26,5 +26,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService  {
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé : " + email));
     return new CustomUserDetails(user);
   }
+
+  
     
 }
