@@ -1,0 +1,44 @@
+.header-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  gap: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* léger ombrage */
+}
+
+.logo-left {
+  height: 40px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto; /* pousse à droite */
+}
+
+.button-group button {
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: white; /* fond blanc */
+  color: black; /* texte noir */
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+  background-color: #f0f0f0; /* effet hover léger */
+}
+
+.logo-profile {
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}

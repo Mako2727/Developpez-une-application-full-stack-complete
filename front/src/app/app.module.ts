@@ -15,7 +15,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ArticleComponent } from './pages/article/article.component';
 import { ThemeComponent } from './pages/theme/theme.component';
-
+import { ArticleModalComponent } from './pages/modal/article-modal/article-modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +27,8 @@ import { ThemeComponent } from './pages/theme/theme.component';
     MeComponent,
     DashboardComponent,
     ArticleComponent,
-    ThemeComponent
+    ThemeComponent,
+    ArticleModalComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,11 @@ import { ThemeComponent } from './pages/theme/theme.component';
     AuthModule ,
     HttpClientModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],
