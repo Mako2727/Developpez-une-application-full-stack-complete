@@ -3,3 +3,18 @@
         (click)="openCreateArticleDialog()">
   Créer un article
 </button>
+
+<div class="articles-container">
+<mat-card *ngFor="let article of articles" class="article-card">
+  <mat-card-header>
+    <mat-card-title>{{ article.title }}</mat-card-title>
+  </mat-card-header>
+  <div class="header-info">
+    <span class="date">{{ article.createdAt | date:'short' }}</span>
+    <span class="author">{{ article.authorName }}</span>
+  </div>
+  <mat-card-content>
+    <p>{{ article.content }}</p>
+  </mat-card-content>
+</mat-card>
+</div>

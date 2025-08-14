@@ -1,11 +1,14 @@
 package com.openclassrooms.mddapi.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.openclassrooms.mddapi.dto.MessageResponseDTO;
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
+import com.openclassrooms.mddapi.dto.PostDTO;
 import com.openclassrooms.mddapi.dto.PostDetailDTO;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.service.impl.PostServiceImpl;
@@ -31,5 +34,11 @@ public class PostController {
         PostDetailDTO postDetail = postService.getPostDetail(id);
         return ResponseEntity.ok(postDetail);
     }
+
+ @GetMapping
+public ResponseEntity<List<PostDetailDTO>> getAllPosts() {
+    List<PostDetailDTO> posts = postService.getAllPosts(); // renvoie List<PostDetailDTO>
+    return ResponseEntity.ok(posts);
+}
 
 }

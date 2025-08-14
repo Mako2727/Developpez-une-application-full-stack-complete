@@ -46,31 +46,22 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http, jwtRequestFilter jwtRequestFilter)
       throws Exception {
 
-    http.authorizeHttpRequests(
-            auth ->
-                auth.requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-                .requestMatchers(
-                        "/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+   http.cors() // <-- active CORS pour que le WebMvcConfigurer soit pris en compte
+        .and()
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+            .anyRequest().authenticated())
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .formLogin(AbstractHttpConfigurer::disable)
         .csrf(csrf -> csrf.disable())
         .authenticationProvider(authenticationProvider())
-        .exceptionHandling(
-            exception ->
-                exception.authenticationEntryPoint(
-                    (request, response, authException) -> {
-                      response.setContentType("application/json");
-                      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
-                      String message = authException.getMessage();
-                      String json =
-                          String.format("{ \"error\": \"%s\" }", message.replace("\"", "\\\""));
-                      response.getOutputStream().println(json);
-                    }));
+        .exceptionHandling(exception -> exception.authenticationEntryPoint((request, response, authException) -> {
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            String message = authException.getMessage();
+            String json = String.format("{ \"error\": \"%s\" }", message.replace("\"", "\\\""));
+            response.getOutputStream().println(json);
+        }));
 
     http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
