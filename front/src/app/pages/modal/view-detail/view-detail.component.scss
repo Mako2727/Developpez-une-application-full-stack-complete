@@ -1,0 +1,72 @@
+mat-dialog-content {
+  padding: 16px;
+  background-color: #fafafa; /* gris très clair */
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header avec thème, auteur et date en colonne */
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: gray;
+  margin-bottom: 12px;
+}
+
+/* Contenu de l’article */
+.content {
+  margin-bottom: 16px;
+}
+
+.content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+}
+
+/* Liste des commentaires */
+.comments h3 {
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  color: #444;
+}
+
+mat-list {
+  padding: 0; /* plus de limite de hauteur, tous les commentaires visibles */
+}
+
+mat-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+mat-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Auteur des commentaires en gras */
+mat-list-item strong {
+  margin-right: 4px;
+  color: #555;
+}
+
+/* Bouton fermer */
+mat-dialog-actions {
+  padding: 8px 16px;
+}
+
+button[mat-button] {
+  color: #000;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 4px 12px;
+}
+
+button[mat-button]:hover {
+  background: #e0e0e0;
+}

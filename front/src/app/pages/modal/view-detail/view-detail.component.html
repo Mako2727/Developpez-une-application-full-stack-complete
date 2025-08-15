@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{ article?.title }}</h2>
+
+<mat-dialog-content *ngIf="article">
+  <div class="header-info">
+    <span class="theme"><strong>Thème : </strong>{{ article.topicName }}</span>
+    <span class="author"><strong>Auteur : </strong>{{ article.authorName }}</span>
+    <span class="date"><strong>Créé le :</strong>{{ article.createdAt | date:'short' }}</span>
+  </div>
+
+  <div class="content">
+
+    <p>{{ article.content }}</p>
+  </div>
+
+  <div class="comments" *ngIf="article.comments?.length">
+    <h3>Commentaires</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let comment of article.comments">
+        <strong>{{ comment.authorName }}:</strong> {{ comment.content }}
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Fermer</button>
+</mat-dialog-actions>

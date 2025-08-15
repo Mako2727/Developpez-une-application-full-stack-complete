@@ -21,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { ViewDetailComponent } from './pages/modal/view-detail/view-detail.component';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { MatCardModule } from '@angular/material/card';
     DashboardComponent,
     ArticleComponent,
     ThemeComponent,
-    ArticleModalComponent
+    ArticleModalComponent,
+    ViewDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

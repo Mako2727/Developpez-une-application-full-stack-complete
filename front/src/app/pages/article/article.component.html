@@ -5,16 +5,16 @@
 </button>
 
 <div class="articles-container">
-<mat-card *ngFor="let article of articles" class="article-card">
-  <mat-card-header>
-    <mat-card-title>{{ article.title }}</mat-card-title>
-  </mat-card-header>
-  <div class="header-info">
-    <span class="date">{{ article.createdAt | date:'short' }}</span>
-    <span class="author">{{ article.authorName }}</span>
-  </div>
-  <mat-card-content>
-    <p>{{ article.content }}</p>
-  </mat-card-content>
-</mat-card>
+  <mat-card *ngFor="let article of articles" class="article-card" (click)="openArticleDetail(article)">
+    <mat-card-header>
+      <mat-card-title>{{ article.title }}</mat-card-title>
+      <mat-card-subtitle class="header-info">
+        <span class="date">{{ article.createdAt | date:'short' }}</span>
+        <span class="author">{{ article.authorName }}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ article.content }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>

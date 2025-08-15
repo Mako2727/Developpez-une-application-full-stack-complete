@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ArticleModalComponent } from '../modal/article-modal/article-modal.component';
 import { ArticleService } from '../../services/article.service';
 import { postDetail } from '../interfaces/postDetail.interface'; 
+import { ViewDetailComponent } from '../modal/view-detail/view-detail.component';
 
 @Component({
   selector: 'app-article',
@@ -31,7 +32,10 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ArticleModalComponent, { width: '500px' });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) console.log('Article créé :', result);
+      if (result) {
+      // recharge la liste des articles après la création
+      this.loadArticles();
+    }
     });
   }
 
@@ -42,6 +46,13 @@ export class ArticleComponent implements OnInit, AfterViewInit {
       this.articles = data;
     },
     error: (err) => console.error('Erreur chargement articles', err)
+  });
+}
+
+openArticleDetail(article: postDetail): void {
+  this.dialog.open(ViewDetailComponent, {
+    width: '600px',
+    data: { id: article.id } // <-- seulement l'id
   });
 }
 }
