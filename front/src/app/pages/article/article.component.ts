@@ -12,7 +12,7 @@ import { ViewDetailComponent } from '../modal/view-detail/view-detail.component'
 })
 export class ArticleComponent implements OnInit, AfterViewInit {
   @ViewChild('createArticleBtnEl') createArticleBtn!: ElementRef<HTMLButtonElement>;
-
+sortAsc: boolean = false; 
     articles: postDetail[] = [];
   constructor(private dialog: MatDialog,
     private articleService: ArticleService) {}
@@ -53,6 +53,15 @@ openArticleDetail(article: postDetail): void {
   this.dialog.open(ViewDetailComponent, {
     width: '600px',
     data: { id: article.id } // <-- seulement l'id
+  });
+}
+
+toggleSortOrder(): void {
+  this.sortAsc = !this.sortAsc;
+  this.articles.sort((a, b) => {
+    const dateA = new Date(a.createdAt).getTime();
+    const dateB = new Date(b.createdAt).getTime();
+    return this.sortAsc ? dateA - dateB : dateB - dateA;
   });
 }
 }

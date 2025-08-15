@@ -4,6 +4,12 @@
   Créer un article
 </button>
 
+<div class="articles-header">
+  <button class="sort-button" (click)="toggleSortOrder()">
+   Trier par : {{ sortAsc ? '↑' : '↓' }}
+  </button>
+</div>
+
 <div class="articles-container">
   <mat-card *ngFor="let article of articles" class="article-card" (click)="openArticleDetail(article)">
     <mat-card-header>

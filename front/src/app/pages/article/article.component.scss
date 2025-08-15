@@ -79,3 +79,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+.articles-header {
+  display: flex;
+  justify-content: flex-end; /* pousse le bouton tout à droite */
+  margin-bottom: 16px;       /* espace sous le header */
+}
+
+.sort-button {
+  color: black;       /* texte noir */
+  background: none;   /* pas de fond */
+  border: none;       /* pas de bord */
+  box-shadow: none;   /* pas d'ombre */
+  text-transform: none; /* conserve la casse du texte */
+  cursor: pointer;    /* curseur main */
+  padding: 4px 8px;   /* padding optionnel */
+}
