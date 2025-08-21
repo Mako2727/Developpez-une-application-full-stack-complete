@@ -1,0 +1,87 @@
+.create-theme-btn {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.themes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  justify-content: center; /* centre la grille */
+  padding: 16px;
+  background-color: white; /* fond du container */
+}
+
+.theme-card {
+  background-color: #f5f5f5;
+  width: 100%;
+  max-width: 320px; /* limite la largeur de chaque carte */
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: gray;
+  margin-bottom: 8px;
+}
+
+.subscribed {
+  text-align: left;
+}
+
+.description {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Responsive : force 2 cartes par ligne sur medium+ */
+@media (min-width: 600px) {
+  .themes-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive : 1 carte par ligne sur petits écrans */
+@media (max-width: 599px) {
+  .themes-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.themes-header {
+  display: flex;
+  justify-content: flex-end; /* pousse le bouton tout à droite */
+  margin-bottom: 16px;       /* espace sous le header */
+}
+
+.sort-button {
+  color: black;       /* texte noir */
+  background: none;   /* pas de fond */
+  border: none;       /* pas de bord */
+  box-shadow: none;   /* pas d'ombre */
+  text-transform: none; /* conserve la casse du texte */
+  cursor: pointer;    /* curseur main */
+  padding: 4px 8px;   /* padding optionnel */
+}
+
+.subscribed-btn {
+  background-color: #6a1b9a; /* violet */
+  color: white;
+  border-radius: 4px;
+}
+
+.unsubscribed-btn {
+  background-color: #757575; /* gris */
+  color: white;
+  border-radius: 4px;
+}
+
+.mat-button {
+  text-transform: none;  /* garde la casse normale */
+}

@@ -37,7 +37,7 @@ public class PostController {
 
  @GetMapping
 public ResponseEntity<List<PostDetailDTO>> getAllPosts() {
-    List<PostDetailDTO> posts = postService.getAllPosts(); // renvoie List<PostDetailDTO>
+    List<PostDetailDTO> posts = postService.getAllPosts(); 
     return ResponseEntity.ok(posts);
 }
 

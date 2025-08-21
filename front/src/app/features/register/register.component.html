@@ -1,0 +1,21 @@
+
+<div class="register-container">
+  <div class="header-with-back">
+    <span class="back-arrow" (click)="goBack()">←</span>
+    <h2>Inscription</h2>
+  </div>
+
+  <!-- Formulaire réactif -->
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label for="username">Nom d'utilisateur</label>
+    <input id="username" type="text" placeholder="Entrez votre nom d'utilisateur" formControlName="username" />
+
+    <label for="email">Adresse mail</label>
+    <input id="email" type="email" placeholder="Entrez votre adresse mail" formControlName="email" />
+
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" placeholder="Entrez votre mot de passe" formControlName="password" />
+
+    <button type="submit" [disabled]="registerForm.invalid">S'inscrire</button>
+  </form>
+</div>

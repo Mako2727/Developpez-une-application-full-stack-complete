@@ -49,7 +49,7 @@ public class SecurityConfig {
    http.cors() // <-- active CORS pour que le WebMvcConfigurer soit pris en compte
         .and()
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+            .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**","/swagger-ui.html").permitAll()
             .anyRequest().authenticated())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .formLogin(AbstractHttpConfigurer::disable)

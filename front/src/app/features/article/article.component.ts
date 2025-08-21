@@ -1,0 +1,65 @@
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ArticleService } from '../../core/services/article.service';
+import { postDetail } from '../../shared/models/postDetail.interface';
+import { ArticleModalComponent } from '../modal/article-modal/article-modal.component';
+import { ViewDetailComponent } from '../modal/view-detail/view-detail.component';
+
+@Component({
+  selector: 'app-article',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
+  
+  ],
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.scss']
+})
+export class ArticleComponent implements OnInit, AfterViewInit {
+  @ViewChild('createArticleBtnEl') createArticleBtn!: ElementRef<HTMLButtonElement>;
+  sortAsc: boolean = false;
+  articles: postDetail[] = [];
+
+  constructor(private dialog: MatDialog, private articleService: ArticleService) {}
+
+  ngOnInit(): void {
+    this.loadArticles();
+  }
+
+  ngAfterViewInit(): void {}
+
+  openCreateArticleDialog(): void {
+    this.createArticleBtn?.nativeElement?.blur();
+    const dialogRef = this.dialog.open(ArticleModalComponent, { width: '500px' });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.loadArticles();
+    });
+  }
+
+  loadArticles(): void {
+    this.articleService.getAllArticles().subscribe({
+      next: (data) => this.articles = data,
+      error: (err) => console.error('Erreur chargement articles', err)
+    });
+  }
+
+  openArticleDetail(article: postDetail): void {
+    // juste appeler le standalone ici, pas besoin de l'import dans 'imports' du component
+    this.dialog.open(ViewDetailComponent, { width: '600px', data: { id: article.id } });
+  }
+
+  toggleSortOrder(): void {
+    this.sortAsc = !this.sortAsc;
+    this.articles.sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      return this.sortAsc ? dateA - dateB : dateB - dateA;
+    });
+  }
+}

@@ -1,47 +1,33 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';          // <-- à ajouter si tu utilises ngModel
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './features/auth/components/register/register.component';
-import { AuthModule } from './features/auth/auth.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MeComponent } from './features/auth/components/me/me.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+// Angular Material
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ArticleComponent } from './pages/article/article.component';
-import { ThemeComponent } from './pages/theme/theme.component';
-import { ArticleModalComponent } from './pages/modal/article-modal/article-modal.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { ViewDetailComponent } from './pages/modal/view-detail/view-detail.component';
 import { MatListModule } from '@angular/material/list';
+
+// Composants non-standalone
+import { AppComponent } from './app.component';
+import { ArticleModalComponent } from './features/modal/article-modal/article-modal.component';
+import { ViewDetailComponent } from './features/modal/view-detail/view-detail.component';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    MeComponent,
-    DashboardComponent,
-    ArticleComponent,
-    ThemeComponent,
-    ArticleModalComponent,
-    ViewDetailComponent
-  ],
+  declarations: [      ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
     FormsModule,
-    AuthModule ,
     HttpClientModule,
+    MatButtonModule,
     MatIconModule,
     MatToolbarModule,
     MatFormFieldModule,
@@ -49,9 +35,9 @@ import { MatListModule } from '@angular/material/list';
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    AppComponent
   ],
   providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

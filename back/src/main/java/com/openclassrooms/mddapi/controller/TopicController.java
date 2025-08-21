@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.MessageResponseDTO;
+import com.openclassrooms.mddapi.dto.SubscribedTopicDTO;
 import com.openclassrooms.mddapi.dto.TopicCreateDTO;
 import com.openclassrooms.mddapi.dto.TopicWithSubscriptionDTO;
 import com.openclassrooms.mddapi.dto.UserMeDTO;
@@ -55,11 +57,15 @@ public ResponseEntity<MessageResponseDTO> subscribeToTopic(@PathVariable Long to
 }
 
 @DeleteMapping("{topicId}")
-public ResponseEntity<String> unsubscribeFromTopic(@PathVariable Long topicId, Authentication authentication) {
-    topicService.unsubscribeUserFromTopic(authentication, topicId);
-    return ResponseEntity.ok("Désabonnement effectué avec succès");
+public ResponseEntity<MessageResponseDTO> unsubscribeFromTopic(@PathVariable Long topicId, Authentication authentication) {
+   String message= topicService.unsubscribeUserFromTopic(authentication, topicId);
+   return ResponseEntity.ok(new MessageResponseDTO(message));
 }
 
-
+@GetMapping("/subscribed")
+public ResponseEntity<List<SubscribedTopicDTO>> getSubscribedTopics() {
+    List<SubscribedTopicDTO> subscribedTopics = topicService.getSubscribedTopicsForCurrentUser();
+    return ResponseEntity.ok(subscribedTopics);
+}
 
 }

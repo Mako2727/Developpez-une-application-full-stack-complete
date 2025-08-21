@@ -1,0 +1,177 @@
+.profile-form {
+  width: 300px;          /* largeur fixe pour centrer plus facilement */
+  margin: 0 auto;        /* centrage horizontal */
+  text-align: center;    /* centre le texte et les labels */
+}
+
+.form-group {
+  margin-bottom: 30px;   /* espace vertical entre chaque groupe */
+}
+
+input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.header-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.divider {
+  width: 150px;
+  margin: 0 auto 30px auto; /* centré horizontalement et espace sous la ligne */
+  border: 1px solid #ccc;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.message {
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.themes-container {
+  display: flex;
+  flex-wrap: wrap;       /* Permet plusieurs lignes */
+  gap: 16px;             /* Espacement entre cartes */
+  margin-top: 16px;
+  justify-content: center; /* Centrer les cartes horizontalement */
+}
+
+/* Chaque carte - 2 par ligne */
+.theme-card {
+  flex: 1 1 calc(50% - 16px); /* Deux cartes par ligne avec gap */
+  max-width: 48%;              /* Sécurise la largeur */
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+}
+
+/* Header de la carte */
+.theme-card mat-card-header {
+  padding-bottom: 8px;
+}
+
+/* Bouton se désabonner - violet */
+.unsubscribe-button {
+  background-color: #7c4dff; /* violet */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #651fff; /* violet plus foncé au hover */
+  }
+}
+
+/* Label de section */
+.section-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 24px;
+  display: block;
+}
+.themes-container {
+  display: flex;
+  flex-wrap: wrap;       /* Permet plusieurs lignes */
+  gap: 16px;             /* Espacement entre cartes */
+  margin-top: 16px;
+  justify-content: center; /* Centrer les cartes horizontalement */
+}
+
+/* Chaque carte - 2 par ligne sur desktop, 1 sur mobile */
+.theme-card {
+  flex: 1 1 calc(50% - 16px); /* Deux cartes par ligne */
+  max-width: 48%;              /* Assure 2 cartes max par ligne */
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+}
+
+/* Responsive - 1 carte par ligne sur petits écrans */
+@media (max-width: 768px) {
+  .theme-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* Bouton se désabonner - violet */
+.unsubscribe-button {
+  background-color: #7c4dff; /* violet */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #651fff; /* violet plus foncé */
+  }
+}
+
+/* Label de section */
+.section-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 24px;
+  display: block;
+}
+
+.unsubscribe-button.subscribed {
+  background-color: #6a0dad;
+  color: white;
+}
+
+.unsubscribe-button.unsubscribed {
+  background-color: #888888;
+  color: white;
+}

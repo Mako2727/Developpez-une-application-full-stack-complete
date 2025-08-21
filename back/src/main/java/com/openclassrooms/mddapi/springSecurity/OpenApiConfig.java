@@ -9,19 +9,22 @@ import org.springframework.context.annotation.Bean;
 public class OpenApiConfig {
       private static final String SECURITY_SCHEME_NAME = "bearerAuth";
 
-  @Bean
-  public OpenAPI customOpenAPI() {
-    return new OpenAPI()
-        .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
-        .components(
-            new Components()
-                .addSecuritySchemes(
-                    SECURITY_SCHEME_NAME,
-                    new SecurityScheme()
-                        .name("Authorization")
-                        .type(SecurityScheme.Type.HTTP)
-                        .scheme("bearer")
-                        .bearerFormat("JWT")));
-  }
+ @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                // Applique le schéma de sécurité à tous les endpoints
+                .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
+                .components(
+                        new Components()
+                                .addSecuritySchemes(
+                                        SECURITY_SCHEME_NAME,
+                                        new SecurityScheme()
+                                                .name(SECURITY_SCHEME_NAME) // reste comme ça
+                                                .type(SecurityScheme.Type.HTTP)
+                                                .scheme("bearer")
+                                                .bearerFormat("JWT")
+                                )
+                );
+    }
     
 }
