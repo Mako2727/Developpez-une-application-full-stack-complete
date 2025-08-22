@@ -18,14 +18,14 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService  {
     this.userRepository = userRepository;
   }
 
-  @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    User user =
-        userRepository
-            .findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé : " + email));
-    return new CustomUserDetails(user);
-  }
+ @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        User user = userRepository.findByUsernameOrEmail(login)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "User not found with username or email: " + login
+                ));
+        return new CustomUserDetails(user);
+    }
 
   
     

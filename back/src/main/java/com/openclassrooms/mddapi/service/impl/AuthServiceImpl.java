@@ -33,15 +33,14 @@ public class AuthServiceImpl implements AuthService {
 
   @Autowired private PasswordEncoder passwordEncoder;
 
-  public String login(String email, String password) {
-   
-      Authentication auth =
-          authenticationManager.authenticate(
-              new UsernamePasswordAuthenticationToken(email, password));
-      CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
-      return jwtUtil.generateToken(userDetails.getUser());
-   
-  }
+public String login(String loginField, String password) {
+
+    // L'AuthenticationManager va utiliser ton CustomUserDetailsService
+    Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginField, password));
+
+    CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+    return jwtUtil.generateToken(userDetails.getUser());
+}
 
   public String register(RegisterDTO request) {
     if (userRepository.findByEmail(request.getEmail()).isPresent()) {
