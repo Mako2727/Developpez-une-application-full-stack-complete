@@ -1,0 +1,75 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.main-container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.info-line {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.description p {
+  text-align: left;
+}
+
+.comments-section {
+  margin-top: 30px;
+}
+
+.comment-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 80px; /* espace réservé à l'auteur */
+  text-align: right; /* l'auteur collé à gauche de la carte */
+}
+
+.comment-card {
+  background: #f5f5f5;
+  padding: 10px 15px;
+  border-radius: 8px;
+  flex: 1;
+  text-align: left;
+}
+
+.new-comment-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.new-comment-textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.send-comment-btn {
+  align-self: flex-end;
+}

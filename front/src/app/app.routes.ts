@@ -7,6 +7,7 @@ import { MeComponent } from './features/me/me.component';
 import { ArticleComponent } from './features/article/article.component';
 import { ThemeComponent } from './features/theme/theme.component';
 import { AuthGuard } from './core/guards/auth.guards';
+import { ArticleDetailComponent  } from './features/article-detail/article-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], title: 'Dashboard' },
   { path: 'article', component: ArticleComponent, canActivate: [AuthGuard], title: 'Article' },
   { path: 'theme', component: ThemeComponent, canActivate: [AuthGuard], title: 'Theme' },
+  { path: 'articleDetail/:id', component: ArticleDetailComponent,  canActivate: [AuthGuard],  title: 'Article Detail'  },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

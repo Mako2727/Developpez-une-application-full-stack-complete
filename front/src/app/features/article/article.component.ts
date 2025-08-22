@@ -7,6 +7,9 @@ import { ArticleService } from '../../core/services/article.service';
 import { postDetail } from '../../shared/models/postDetail.interface';
 import { ArticleModalComponent } from '../modal/article-modal/article-modal.component';
 import { ViewDetailComponent } from '../modal/view-detail/view-detail.component';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router'; 
+import { ArticleDetailComponent } from '../article-detail/article-detail.component';
 
 @Component({
   selector: 'app-article',
@@ -16,6 +19,8 @@ import { ViewDetailComponent } from '../modal/view-detail/view-detail.component'
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
+     RouterModule,
+     ArticleDetailComponent
   
   ],
   templateUrl: './article.component.html',
@@ -26,7 +31,7 @@ export class ArticleComponent implements OnInit, AfterViewInit {
   sortAsc: boolean = false;
   articles: postDetail[] = [];
 
-  constructor(private dialog: MatDialog, private articleService: ArticleService) {}
+  constructor(private dialog: MatDialog, private articleService: ArticleService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadArticles();
@@ -49,10 +54,10 @@ export class ArticleComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openArticleDetail(article: postDetail): void {
-    // juste appeler le standalone ici, pas besoin de l'import dans 'imports' du component
-    this.dialog.open(ViewDetailComponent, { width: '600px', data: { id: article.id } });
-  }
+openArticleDetail(article: postDetail): void {
+  console.log('Naviguer vers ArticleDetail pour id :', article.id);
+this.router.navigate(['/articleDetail', article.id]);
+}
 
   toggleSortOrder(): void {
     this.sortAsc = !this.sortAsc;
@@ -62,4 +67,6 @@ export class ArticleComponent implements OnInit, AfterViewInit {
       return this.sortAsc ? dateA - dateB : dateB - dateA;
     });
   }
+
+  
 }

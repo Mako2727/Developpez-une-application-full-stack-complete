@@ -19,9 +19,12 @@ import { MatListModule } from '@angular/material/list';
 import { AppComponent } from './app.component';
 import { ArticleModalComponent } from './features/modal/article-modal/article-modal.component';
 import { ViewDetailComponent } from './features/modal/view-detail/view-detail.component';
+import { ArticledetailsComponent } from './features/articledetails/articledetails.component';
 
 @NgModule({
-  declarations: [      ],
+  declarations: [      
+    
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -9,6 +9,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { MeComponent } from './features/me/me.component';
 import { ArticleComponent } from './features/article/article.component';
 import { ThemeComponent } from './features/theme/theme.component';
+import { ArticledetailsComponent  } from './features/articledetails/articledetails.component';
 
 export const routes: Routes = [
   {
@@ -50,5 +51,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     title: 'Theme',
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+{
+  path: 'articles',
+  component: ArticledetailsComponent,
+  canActivate: [AuthGuard],
+  title: 'Article Detail',
+},
+{ path: '**', redirectTo: '', pathMatch: 'full' }
 ];
