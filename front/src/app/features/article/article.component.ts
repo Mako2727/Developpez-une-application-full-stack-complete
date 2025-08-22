@@ -39,12 +39,9 @@ export class ArticleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {}
 
-  openCreateArticleDialog(): void {
-    this.createArticleBtn?.nativeElement?.blur();
-    const dialogRef = this.dialog.open(ArticleModalComponent, { width: '500px' });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) this.loadArticles();
-    });
+  CreateArticle(): void {
+   
+this.router.navigate(['/createarticle']);
   }
 
   loadArticles(): void {
