@@ -1,18 +1,34 @@
 <mat-toolbar class="custom-toolbar">
-  <img src="../../../assets/logo_p6.png" alt="Logo" height="40" style="margin-right: 16px" />
+  <!-- Logo toujours visible sur login/register ou si connecté -->
+  <img *ngIf="showLogo" src="../../../assets/logo_p6.png" alt="Logo" height="40" class="logo-left" />
 
   <span class="spacer"></span>
 
-  <button mat-button  (click)="logOut()">Se déconnecter</button>
-  <button mat-button routerLink="/article">Article</button>
-  <button mat-button routerLink="/theme">Thème</button>
+  <!-- Boutons uniquement si connecté -->
+  <div class="button-group" *ngIf="sessionService.isLogged">
+    <button mat-button (click)="logOut()">Se déconnecter</button>
+    <button mat-button routerLink="/article">Article</button>
+    <button mat-button routerLink="/theme">Thème</button>
+    <button mat-icon-button aria-label="Profil" routerLink="/me" class="profile-logo">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
 
-  <button mat-icon-button aria-label="Profil"  routerLink="/me">
-    <mat-icon>account_circle</mat-icon>
+  <!-- Burger menu uniquement si connecté -->
+  <button mat-icon-button class="burger-menu-btn" *ngIf="sessionService.isLogged" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
 
+<!-- Menu mobile uniquement si connecté -->
+<div class="mobile-menu" [class.show]="menuOpen" *ngIf="sessionService.isLogged">
+  <button mat-icon-button aria-label="Profil" routerLink="/me" class="profile-logo-mobile">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-button routerLink="/article">Article</button>
+  <button mat-button routerLink="/theme">Thème</button>
+  <button mat-button (click)="logOut()">Se déconnecter</button>
+</div>
+
 <hr class="toolbar-separator" />
-
-
 <router-outlet></router-outlet>

@@ -19,3 +19,25 @@ button.mat-raised-button {
   border: 2px solid black !important;
   box-shadow: none !important; 
 }
+
+/* Responsive pour écrans étroits */
+@media (max-width: 600px) {
+  .center {
+    padding: 1rem;
+  }
+
+  .button-container {
+    flex-direction: column; /* les boutons passent en colonne */
+    gap: 0.5rem;            /* moins d’espace entre eux */
+  }
+
+  .center img {
+    width: 70%;             /* logo plus petit pour mobile */
+    max-width: 200px;       /* limite max si l’écran est un peu large */
+    height: auto;
+  }
+
+  button.mat-raised-button {
+    width: 100%;            /* boutons prennent toute la largeur du container */
+  }
+}

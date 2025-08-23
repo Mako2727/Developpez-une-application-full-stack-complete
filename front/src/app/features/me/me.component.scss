@@ -1,47 +1,64 @@
+/* ---------- Profil utilisateur ---------- */
 .profile-form {
-  width: 300px;          /* largeur fixe pour centrer plus facilement */
+  width: 300px;          /* largeur fixe pour centrer */
   margin: 0 auto;        /* centrage horizontal */
-  text-align: center;    /* centre le texte et les labels */
+  text-align: center;    /* centre texte et labels */
 }
 
 .form-group {
-  margin-bottom: 30px;   /* espace vertical entre chaque groupe */
+  margin-bottom: 20px;   /* espace vertical entre inputs */
 }
 
 input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 12px;
   font-size: 16px;
   box-sizing: border-box;
+  border: 1px solid #6a0dad; /* bord violet */
+  border-radius: 8px;         /* arrondi */
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: #540a85;  /* violet foncé au focus */
+  }
 }
 
+/* Bouton Sauvegarder violet */
+.profile-form button {
+  margin-top: 10px;
+  background-color: #6a0dad; /* violet */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #540a85; /* violet foncé */
+  }
+}
+
+/* Titre de section */
 .header-title {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
-.divider {
-  width: 150px;
-  margin: 0 auto 30px auto; /* centré horizontalement et espace sous la ligne */
-  border: 1px solid #ccc;
+/* Texte Abonnement centré */
+.section-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 24px;
+  text-align: center;
+  display: block;
 }
 
-.back-button {
-  background-color: transparent;
-  border: none;
-  color: #007bff;
-  font-size: 16px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  padding: 0;
-}
-
-.back-button:hover {
-  text-decoration: underline;
-}
-
+/* Messages succès / erreur */
 .message {
   font-weight: bold;
   margin-bottom: 15px;
@@ -56,18 +73,18 @@ input {
   color: red;
 }
 
+/* Cartes abonnements */
 .themes-container {
-  display: flex;
-  flex-wrap: wrap;       /* Permet plusieurs lignes */
-  gap: 16px;             /* Espacement entre cartes */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne sur grand écran */
+  gap: 16px;
   margin-top: 16px;
-  justify-content: center; /* Centrer les cartes horizontalement */
+  justify-items: center; /* centre horizontalement chaque carte */
 }
 
-/* Chaque carte - 2 par ligne */
 .theme-card {
-  flex: 1 1 calc(50% - 16px); /* Deux cartes par ligne avec gap */
-  max-width: 48%;              /* Sécurise la largeur */
+  width: 100%;
+  max-width: 320px; /* largeur max pour chaque carte */
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
@@ -80,98 +97,42 @@ input {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   }
+
+  mat-card-header {
+    padding-bottom: 8px;
+  }
+
+  /* Centrer uniquement le bouton Se désabonner */
+  mat-card-actions {
+    display: flex;
+    justify-content: center; /* bouton centré */
+    padding-bottom: 10px;
+  }
 }
 
-/* Header de la carte */
-.theme-card mat-card-header {
-  padding-bottom: 8px;
-}
-
-/* Bouton se désabonner - violet */
+/* Boutons Se désabonner violet */
 .unsubscribe-button {
-  background-color: #7c4dff; /* violet */
+  background-color: #6a0dad; /* violet */
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: #651fff; /* violet plus foncé au hover */
+    background-color: #540a85;
   }
-}
-
-/* Label de section */
-.section-label {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 24px;
-  display: block;
-}
-.themes-container {
-  display: flex;
-  flex-wrap: wrap;       /* Permet plusieurs lignes */
-  gap: 16px;             /* Espacement entre cartes */
-  margin-top: 16px;
-  justify-content: center; /* Centrer les cartes horizontalement */
-}
-
-/* Chaque carte - 2 par ligne sur desktop, 1 sur mobile */
-.theme-card {
-  flex: 1 1 calc(50% - 16px); /* Deux cartes par ligne */
-  max-width: 48%;              /* Assure 2 cartes max par ligne */
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  }
-}
-
-/* Responsive - 1 carte par ligne sur petits écrans */
-@media (max-width: 768px) {
-  .theme-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
-
-/* Bouton se désabonner - violet */
-.unsubscribe-button {
-  background-color: #7c4dff; /* violet */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: #651fff; /* violet plus foncé */
-  }
-}
-
-/* Label de section */
-.section-label {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-top: 24px;
-  display: block;
-}
-
-.unsubscribe-button.subscribed {
-  background-color: #6a0dad;
-  color: white;
 }
 
 .unsubscribe-button.unsubscribed {
   background-color: #888888;
-  color: white;
+}
+
+/* Responsive - 1 carte par ligne sur petit écran */
+@media (max-width: 768px) {
+  .themes-container {
+    grid-template-columns: 1fr; /* 1 carte par ligne */
+  }
 }

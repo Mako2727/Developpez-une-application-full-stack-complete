@@ -1,60 +1,81 @@
-.header {
+.back-container {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  width: 100%;
+  margin-bottom: 16px;
+  position: relative;
 }
 
-.header h2 {
-  margin: 0;
+.back-btn {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Titre article */
+.article-title {
+  width: 100%;
+  text-align: center;
   font-size: 1.5rem;
-  text-align: left;
+  margin: 0;
+  padding: 0 40px; /* espace pour la flèche */
 }
 
+/* Conteneur principal */
 .main-container {
   margin: 0 auto;
   max-width: 800px;
   padding: 0 20px;
 }
 
+/* Ligne infos : date / auteur / thème */
 .info-line {
   display: flex;
   gap: 15px;
   font-size: 0.9rem;
   color: #555;
   margin-bottom: 20px;
-  text-align: left;
 }
 
 .description p {
   text-align: left;
 }
 
+/* --------- Section commentaires --------- */
 .comments-section {
   margin-top: 30px;
+
+  h3 {
+    margin-bottom: 15px;
+  }
 }
 
+/* Commentaires */
 .comment-wrapper {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column; /* empile auteur + contenu */
   margin-bottom: 15px;
 }
 
 .comment-author {
   font-weight: bold;
-  margin-right: 10px;
-  min-width: 80px; /* espace réservé à l'auteur */
-  text-align: right; /* l'auteur collé à gauche de la carte */
+  text-align: right; /* collé au bord droit */
+  margin-bottom: 5px;
 }
 
 .comment-card {
   background: #f5f5f5;
   padding: 10px 15px;
   border-radius: 8px;
-  flex: 1;
   text-align: left;
+  word-break: break-word;
 }
 
+/* Nouveau commentaire */
 .new-comment-container {
   display: flex;
   align-items: flex-start;
@@ -71,5 +92,107 @@
 }
 
 .send-comment-btn {
-  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px; /* ajuste selon la hauteur de textarea */
+  width: 40px;
+}
+
+/* --------- Responsive mobile --------- */
+@media (max-width: 599px) {
+  /* Header */
+  .back-container {
+    justify-content: center; /* centre le titre */
+  }
+
+  .article-title {
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 0 40px; /* laisse de l’espace pour la flèche */
+  }
+
+  /* Infos article */
+  .info-line {
+    display: flex;
+    flex-direction: column; /* empile date / auteur / thème */
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .info-line .date {
+    width: 100%;
+    text-align: left; /* collé au bord gauche */
+  }
+
+  .info-line .author {
+    width: 100%;
+    text-align: center; /* centré */
+  }
+
+  .info-line .theme {
+    width: 100%;
+    text-align: left; /* en dessous */
+  }
+
+  /* Commentaires */
+  .comment-wrapper {
+    flex-direction: column;
+  }
+
+  .comment-author {
+    text-align: right; /* collé au bord droit */
+    margin-bottom: 5px;
+  }
+
+  /* Nouveau commentaire */
+  .new-comment-container {
+    flex-direction: row;      /* texte et bouton sur la même ligne */
+    align-items: center;      /* bouton centré verticalement */
+    gap: 10px;                /* espace entre textarea et bouton */
+  }
+
+  .new-comment-textarea {
+    flex: 1;                  /* prend tout l’espace restant */
+    min-width: 0;             /* important pour que flex fonctionne */
+    margin-bottom: 0;         /* supprime l’espace en dessous */
+  }
+
+  .send-comment-btn {
+    flex: 0 0 auto;           /* taille fixe */
+    width: 40px;
+    height: 40px;
+    align-self: center; 
+      background-color: white;   /* fond du bouton */
+ 
+  }
+}
+
+
+/* flèche vers le bas */
+.send-comment-btn mat-icon {
+  transform: rotate(315deg);
+    color: #6a0dad;  /* définit la couleur de l'icône */
+  font-size: 28px; /* taille */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centre le titre */
+  position: relative;      /* pour positionner la flèche indépendamment */
+  margin-bottom: 15px;
+}
+
+/* flèche back à gauche */
+.back-btn {
+  position: absolute;
+  left: 0;
+}
+
+/* titre centré */
+.header h2 {
+  margin: 0 auto;
+  text-align: center;
 }

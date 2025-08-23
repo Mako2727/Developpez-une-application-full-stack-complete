@@ -1,50 +1,40 @@
 .create-article-btn {
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin: 20px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
 }
 
-.articles-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
-  padding: 16px;
-  background-color: white; /* fond du container */
-}
-
-.article-card {
-  width: 100%;
-  background-color: #f0f0f0; /* fond gris clair des cartes */
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.header-info {
+.articles-header {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: gray;
+  justify-content: flex-end;
+  margin: 0 20px 16px 20px;
 }
 
-.date {
-  text-align: left;
+.sort-button {
+  color: black;
+  background: none;
+  border: none;
+  box-shadow: none;
+  text-transform: none;
+  cursor: pointer;
+  padding: 4px 8px;
 }
 
-.author {
-  text-align: right;
-}
+/* Container des articles */
 .articles-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
-  justify-content: center; /* centre la grille */
+  justify-content: center;
   padding: 16px;
-  background-color: white; /* fond gris clair */
+  background-color: white;
 }
 
+/* Cartes articles */
 .article-card {
   background-color: #f5f5f5;
   width: 100%;
-  max-width: 320px; /* limite la largeur de chaque carte */
+  max-width: 320px;
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -66,32 +56,60 @@
   text-align: right;
 }
 
-/* Responsive : force 2 cartes par ligne sur medium+ */
-@media (min-width: 600px) {
+/* Responsive : 2 cartes par ligne sur tablettes et desktop */
+@media (min-width: 600px) and (max-width: 1023px) {
   .articles-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Responsive : 1 carte par ligne sur petits écrans */
-@media (max-width: 599px) {
+/* Responsive : 3 cartes par ligne sur écrans larges */
+@media (min-width: 1024px) {
   .articles-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.articles-header {
-  display: flex;
-  justify-content: flex-end; /* pousse le bouton tout à droite */
-  margin-bottom: 16px;       /* espace sous le header */
-}
+/* Responsive mobile : 1 carte par ligne */
+@media (max-width: 599px) {
+  .articles-container {
+    grid-template-columns: 1fr;
+    padding: 8px;
+    gap: 12px;
+  }
 
-.sort-button {
-  color: black;       /* texte noir */
-  background: none;   /* pas de fond */
-  border: none;       /* pas de bord */
-  box-shadow: none;   /* pas d'ombre */
-  text-transform: none; /* conserve la casse du texte */
-  cursor: pointer;    /* curseur main */
-  padding: 4px 8px;   /* padding optionnel */
+  .create-article-btn {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .articles-header {
+    margin: 0 8px 12px 8px;
+  }
+
+  .sort-button {
+    font-size: 0.9rem;
+    padding: 3px 6px;
+  }
+
+  .article-card {
+    max-width: 100%;
+    padding: 8px;
+  }
+}
+@media (max-width: 599px) {
+  .create-article-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px; // espace sous le bouton
+  }
+
+  .articles-header {
+    justify-content: center; // centre le bouton "Trier par"
+    margin-bottom: 16px;
+  }
+
+  .sort-button {
+    text-align: center;
+  }
 }

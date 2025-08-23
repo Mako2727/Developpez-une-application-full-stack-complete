@@ -1,13 +1,12 @@
-<div class="back-container">
-  <button mat-icon-button (click)="goBack()" class="back-btn">
+<div class="header">
+  <button mat-icon-button class="back-btn" (click)="goBack()">
     <mat-icon>arrow_back</mat-icon>
   </button>
+  <h2 class="article-title">{{ article?.title }}</h2>
 </div>
 
 <!-- Conteneur principal -->
 <div class="main-container">
-  <h2 class="article-title">{{ article?.title }}</h2>
-
   <!-- Infos date, auteur, thème -->
   <div class="info-line">
     <span class="date">{{ article?.createdAt | date:'short' }}</span>
@@ -22,6 +21,7 @@
 
   <hr />
 
+  <!-- Section commentaires -->
   <div class="comments-section">
     <h3>Commentaires</h3>
     <div *ngFor="let comment of article?.comments" class="comment-wrapper">
