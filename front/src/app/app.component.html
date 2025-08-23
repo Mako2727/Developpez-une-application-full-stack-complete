@@ -30,5 +30,5 @@
   <button mat-button (click)="logOut()">Se déconnecter</button>
 </div>
 
-<hr class="toolbar-separator" />
+<hr *ngIf="showLogo"  class="toolbar-separator" />
 <router-outlet></router-outlet>
