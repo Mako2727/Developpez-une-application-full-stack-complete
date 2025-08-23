@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginRequest } from '../../shared/models/loginRequest.interface';
@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/models/user.interface';
 import { environment } from 'src/environments/environment';
 import { userMe } from 'src/app/shared/models/userMe.interface';
 import { UserUpdate } from '../../shared/models/userUpdate.interface';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,33 +19,29 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // Inscription
   public register(registerRequest: RegisterRequest): Observable<AuthSuccess> {
     const url = `${this.pathService}api/auth/register`;
-console.log('URL complète absolue XX:', url);
-console.log("JSON envoyé :", JSON.stringify(registerRequest));
-    return this.httpClient.post<AuthSuccess>(`${this.pathService}api/auth/register`, registerRequest);
+    console.log('URL complète absolue XX:', url);
+    console.log("JSON envoyé :", JSON.stringify(registerRequest));
+    return this.httpClient.post<AuthSuccess>(url, registerRequest);
   }
 
+  // Connexion
   public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
-       const url = `${this.pathService}api/auth/login`;
-console.log('URL complète absolue XX:', url);
+    const url = `${this.pathService}api/auth/login`;
+    console.log('URL complète absolue XX:', url);
     console.log("JSON envoyé :", JSON.stringify(loginRequest));
-    return this.httpClient.post<AuthSuccess>(`${this.pathService}api/auth/login`, loginRequest);
+    return this.httpClient.post<AuthSuccess>(url, loginRequest);
   }
 
-  public me(): Observable<userMe> {
-    const token = localStorage.getItem('token');
-console.log('Token envoyé:', token);
- const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
-    return this.httpClient.get<userMe>(`${this.pathService}api/auth/me`, { headers });
-  }
-
-
-public updateUser(updatedUser: UserUpdate): Observable<userMe> {
-  const token = localStorage.getItem('token');
-  console.log('Token envoyé:', token);
-  console.log('Données UserUpdate à envoyer:', updatedUser); 
-  const headers = new HttpHeaders({'Authorization': `Bearer ${token}` });
-  return this.httpClient.put<userMe>(`${this.pathService}api/auth/me`,updatedUser,  { headers }    );
+public me(): Observable<userMe> {
+  return this.httpClient.get<userMe>(`${this.pathService}api/auth/me`);
 }
+
+  // Mise à jour du profil utilisateur
+  public updateUser(updatedUser: UserUpdate): Observable<userMe> {
+    console.log('Données UserUpdate à envoyer:', updatedUser);
+    return this.httpClient.put<userMe>(`${this.pathService}api/auth/me`, updatedUser);
+  }
 }

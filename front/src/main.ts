@@ -2,7 +2,7 @@ import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,8 @@ import { MatListModule } from '@angular/material/list';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { environment } from './environments/environment';
+
+import { JwtInterceptor } from './app/core/services/jwt.interceptor';
 
 
 if (environment.production) {
@@ -40,6 +42,11 @@ bootstrapApplication(AppComponent, {
       MatCardModule,
       MatListModule,
       BrowserAnimationsModule
-    )
+    ),
+     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
   ]
 }).catch(err => console.error(err));

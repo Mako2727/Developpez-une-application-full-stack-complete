@@ -42,22 +42,32 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (!this.registerForm.valid) return;
+onSubmit(): void {
+  if (!this.registerForm.valid) return;
 
-    const registerRequest = this.registerForm.value;
-    this.authService.register(registerRequest).subscribe({
-      next: (response: AuthSuccess) => {
-        localStorage.setItem('token', response.token);
-        this.authService.me().subscribe((user: User) => {
-          this.sessionService.logIn(user);
-          console.log("Token reçu ", response.token);
-          this.router.navigate(['/dashboard']);
-        });
-      },
-      error: () => this.onError = true
-    });
-  }
+  const registerRequest = this.registerForm.value;
+  this.authService.register(registerRequest).subscribe({
+    next: (response: AuthSuccess) => {
+      // Stocke le token dans le localStorage
+      localStorage.setItem('token', response.token);
+
+      // Récupère les infos de l'utilisateur
+      this.authService.me().subscribe((user: User) => {
+        // Crée un objet compatible SessionInformation
+        const sessionInfo = {
+          token: response.token,
+          username: user.username,
+          email: user.email
+        };
+
+        this.sessionService.logIn(sessionInfo);
+        console.log("Token et session enregistrés", sessionInfo);
+        this.router.navigate(['/dashboard']);
+      });
+    },
+    error: () => this.onError = true
+  });
+}
 
   goBack(): void {
     this.router.navigate(['/']);

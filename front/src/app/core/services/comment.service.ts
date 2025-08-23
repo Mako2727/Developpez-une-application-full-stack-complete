@@ -16,13 +16,7 @@ export class CommentService {
 
 
 addComment(articleId: number, comment: createComment): Observable<string> {
-
-    console.log('Article ID:', articleId);
-  console.log('Comment:', comment);
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-  console.log('Token envoyé:', token);
-  return this.HttpClient.post<string>(`${this.pathService}api/posts/comments/${articleId}`,comment, { headers });
+  return this.HttpClient.post<string>(`${this.pathService}api/posts/comments/${articleId}`,comment);
 }
 
 }

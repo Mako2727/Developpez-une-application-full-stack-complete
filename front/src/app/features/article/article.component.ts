@@ -5,8 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ArticleService } from '../../core/services/article.service';
 import { postDetail } from '../../shared/models/postDetail.interface';
-import { ArticleModalComponent } from '../modal/article-modal/article-modal.component';
-import { ViewDetailComponent } from '../modal/view-detail/view-detail.component';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router'; 
 import { ArticleDetailComponent } from '../article-detail/article-detail.component';

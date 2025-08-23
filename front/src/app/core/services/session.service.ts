@@ -1,36 +1,49 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { User } from '../../shared/models/user.interface';
+//import { SessionInformation } from '../../shared/models/sessionInformation.interface';
+import { SessionInformation } from '../../shared/models/SessionInformation.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  public isLogged = false;
-  public user: User | undefined;
+  // Indique si l'utilisateur est connecté
+  private isLoggedSubject = new BehaviorSubject<boolean>(false);
+  public isLogged$: Observable<boolean> = this.isLoggedSubject.asObservable();
 
-  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
+  // Contient les infos de session (token, user, etc.)
+  private _sessionInformation: SessionInformation | null = null;
 
-  public $isLogged(): Observable<boolean> {
-    return this.isLoggedSubject.asObservable();
+  constructor() {
+    // Optionnel : charger la session depuis le localStorage si persistance souhaitée
+    const stored = localStorage.getItem('sessionInformation');
+    if (stored) {
+      this._sessionInformation = JSON.parse(stored);
+      this.isLoggedSubject.next(true);
+    }
   }
 
-  public logIn(user: User): void {
-    this.user = user;
-    this.isLogged = true;
-    this.next();
+  // Getter pratique pour accéder aux infos de session
+  public get sessionInformation(): SessionInformation | null {
+    return this._sessionInformation;
   }
 
+  public get isLogged(): boolean {
+    return !!this._sessionInformation;
+  }
+
+  // Méthode pour connecter l'utilisateur
+  public logIn(sessionInfo: SessionInformation): void {
+    this._sessionInformation = sessionInfo;
+    this.isLoggedSubject.next(true);
+    localStorage.setItem('sessionInformation', JSON.stringify(sessionInfo)); // persistance optionnelle
+  }
+
+  // Méthode pour déconnecter l'utilisateur
   public logOut(): void {
-    localStorage.removeItem('token');
-    this.user = undefined;
-    this.isLogged = false;
-    this.next();
-  }
-
-  private next(): void {
-    this.isLoggedSubject.next(this.isLogged);
+    this._sessionInformation = null;
+    this.isLoggedSubject.next(false);
+    localStorage.removeItem('sessionInformation'); // effacer le token
   }
 }

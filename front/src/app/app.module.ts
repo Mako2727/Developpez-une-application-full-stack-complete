@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
@@ -17,13 +17,13 @@ import { MatListModule } from '@angular/material/list';
 
 // Composants non-standalone
 import { AppComponent } from './app.component';
-import { ArticleModalComponent } from './features/modal/article-modal/article-modal.component';
-import { ViewDetailComponent } from './features/modal/view-detail/view-detail.component';
 import { ArticledetailsComponent } from './features/articledetails/articledetails.component';
 import { CreateArticleComponent } from './features/create-article/create-article.component';
 
+import { JwtInterceptor } from './core/services/jwt.interceptor';
+
 @NgModule({
-  declarations: [   ],
+  declarations: [     ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -38,8 +38,14 @@ import { CreateArticleComponent } from './features/create-article/create-article
     MatSelectModule,
     MatCardModule,
     MatListModule,
-    AppComponent
+    AppComponent,
+    CreateArticleComponent,
+    AppComponent  
   ],
-  providers: [],
+  providers: [  {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }],
 })
 export class AppModule {}

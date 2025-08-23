@@ -14,12 +14,14 @@ describe('AuthGuard', () => {
     routerMock = {
       navigate: jest.fn()
     };
+
+    // Mock complet de SessionService
     sessionServiceMock = {
-      isLogged: false
+      get isLogged() { return false; } // readonly simulé
     };
 
     guard = new AuthGuard(routerMock as Router, sessionServiceMock as SessionService);
-    localStorage.clear(); // pour être sûr que le token n'existe pas
+    localStorage.clear();
   });
 
   it('should redirect to home if no token', () => {
@@ -37,12 +39,14 @@ describe('AuthGuard', () => {
 
   it('should allow activation if token exists and session is logged', () => {
     localStorage.setItem('token', 'fake-token');
-    sessionServiceMock.isLogged = true;
+    // Recrée le mock avec isLogged = true
+    sessionServiceMock = { get isLogged() { return true; } };
+    guard = new AuthGuard(routerMock as Router, sessionServiceMock as SessionService);
+
     const result = guard.canActivate();
     expect(result).toBe(true);
   });
 });
-
 
 describe('AuthGuard Integration with fakeAsync', () => {
   let guard: AuthGuard;
@@ -59,13 +63,13 @@ describe('AuthGuard Integration with fakeAsync', () => {
     router = TestBed.inject(Router);
     sessionService = TestBed.inject(SessionService);
 
-    localStorage.clear(); // s'assurer qu'il n'y a pas de token résiduel
-    sessionService.isLogged = false; // état initial
+    localStorage.clear();
   });
 
   it('should allow access when token exists and session is logged', fakeAsync(() => {
     localStorage.setItem('token', 'mock-token');
-    sessionService.isLogged = true;
+
+    Object.defineProperty(sessionService, 'isLogged', { get: () => true });
 
     const result = guard.canActivate();
     tick();
@@ -84,7 +88,8 @@ describe('AuthGuard Integration with fakeAsync', () => {
 
   it('should allow access when token exists but session not logged', fakeAsync(() => {
     localStorage.setItem('token', 'mock-token');
-    sessionService.isLogged = false;
+
+    Object.defineProperty(sessionService, 'isLogged', { get: () => false });
 
     const result = guard.canActivate();
     tick();

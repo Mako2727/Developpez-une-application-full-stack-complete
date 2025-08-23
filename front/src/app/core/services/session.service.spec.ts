@@ -1,36 +1,57 @@
 /// <reference types="jest" />
 
-import { TestBed } from '@angular/core/testing';
 import { SessionService } from './session.service';
-import { User } from '../../shared/models/user.interface';
+import { SessionInformation } from '../../shared/models/SessionInformation.interface';
 
 describe('SessionService', () => {
   let service: SessionService;
-  const mockUser = { email: 'test@test.com', username: 'testuser' };
+  const mockSession: SessionInformation = { 
+    token: 'mock-token', 
+    username: 'testuser', 
+    id: 1, 
+    firstName: 'Test', 
+    lastName: 'User', 
+    admin: false 
+  };
 
   beforeEach(() => {
-    service = new SessionService();
     localStorage.clear();
+    service = new SessionService();
   });
 
-  it('should log in a user', () => {
-    service.logIn(mockUser);
-
-    service.$isLogged().subscribe(isLogged => {
-      expect(isLogged).toBe(true);
-      expect(service.user).toEqual(mockUser);
-    });
-  });
-
-  it('should log out a user', () => {
-    service.logIn(mockUser); // d'abord login
-
-    service.logOut(); // puis logout
-
-    service.$isLogged().subscribe(isLogged => {
+  it('should initialize with no session', (done) => {
+    expect(service.sessionInformation).toBeNull();
+    service.isLogged$.subscribe(isLogged => {
       expect(isLogged).toBe(false);
-      expect(service.user).toBeUndefined();
-      expect(localStorage.getItem('token')).toBeNull();
+      done();
     });
+  });
+
+  it('should log in a user', (done) => {
+    service.logIn(mockSession);
+
+    expect(service.sessionInformation).toEqual(mockSession);
+
+    service.isLogged$.subscribe(isLogged => {
+      expect(isLogged).toBe(true);
+      done();
+    });
+
+    const stored = JSON.parse(localStorage.getItem('sessionInformation')!);
+    expect(stored).toEqual(mockSession);
+  });
+
+  it('should log out a user', (done) => {
+    service.logIn(mockSession); // login d’abord
+    service.logOut();            // puis logout
+
+    expect(service.sessionInformation).toBeNull();
+
+    service.isLogged$.subscribe(isLogged => {
+      expect(isLogged).toBe(false);
+      done();
+    });
+
+    expect(localStorage.getItem('sessionInformation')).toBeNull();
   });
 });

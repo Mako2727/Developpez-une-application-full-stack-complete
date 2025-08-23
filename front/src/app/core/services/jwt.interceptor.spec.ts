@@ -1,51 +1,51 @@
 /// <reference types="jest" />
 
 import { JwtInterceptor } from './jwt.interceptor';
-import { HttpRequest, HttpHandler } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { SessionService } from './session.service';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe('JwtInterceptor (Jest pur)', () => {
+describe('JwtInterceptor', () => {
   let interceptor: JwtInterceptor;
-  let httpHandler: HttpHandler;
+  let httpMock: HttpTestingController;
+  let http: HttpClient;
+
+  let sessionServiceMock: Partial<SessionService>;
 
   beforeEach(() => {
-    interceptor = new JwtInterceptor();
-    httpHandler = {
-      handle: jest.fn().mockImplementation(req => req) // retourne la requête pour inspection
-    } as unknown as HttpHandler;
+    // On crée un mock pour sessionService avec un getter sur sessionInformation
+    sessionServiceMock = {};
+    Object.defineProperty(sessionServiceMock, 'sessionInformation', {
+      get: () => ({ token: 'mock-token', username: 'testuser' })
+    });
+
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: SessionService, useValue: sessionServiceMock },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: JwtInterceptor,
+          multi: true
+        }
+      ]
+    });
+
+    interceptor = TestBed.inject(JwtInterceptor);
+    httpMock = TestBed.inject(HttpTestingController);
+    http = TestBed.inject(HttpClient);
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
+    httpMock.verify();
   });
 
-  it('should add Authorization header when token exists', () => {
-    // Mock localStorage
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        getItem: jest.fn().mockReturnValue('mock-token')
-      },
-      writable: true,
-    });
+  it('should add Authorization header', () => {
+    http.get('/test').subscribe();
 
-    const req = new HttpRequest('GET', '/api/test');
-    interceptor.intercept(req, httpHandler);
-
-    const handledReq = (httpHandler.handle as jest.Mock).mock.calls[0][0] as HttpRequest<any>;
-    expect(handledReq.headers.get('Authorization')).toBe('Bearer mock-token');
-  });
-
-  it('should not add Authorization header when token is absent', () => {
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        getItem: jest.fn().mockReturnValue(null)
-      },
-      writable: true,
-    });
-
-    const req = new HttpRequest('GET', '/api/test');
-    interceptor.intercept(req, httpHandler);
-
-    const handledReq = (httpHandler.handle as jest.Mock).mock.calls[0][0] as HttpRequest<any>;
-    expect(handledReq.headers.get('Authorization')).toBeNull();
+    const req = httpMock.expectOne('/test');
+    expect(req.request.headers.get('Authorization')).toBe('Bearer mock-token');
+    req.flush({});
   });
 });

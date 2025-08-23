@@ -6,36 +6,30 @@ import { ThemeService } from './theme.service';
 import { environment } from 'src/environments/environment';
 import { MessageResponse } from '../../shared/models/messageResponse.interface';
 import { Theme } from '../../shared/models/theme.interface';
+import { SessionService } from './session.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
 
 describe('ThemeService', () => {
   let service: ThemeService;
   let httpMock: HttpTestingController;
+  let mockSessionService: Partial<SessionService>;
 
-  beforeAll(() => {
-    // Mock complet de localStorage
-    const store: { [key: string]: string } = {};
-    Object.defineProperty(window, 'localStorage', {
-      value: {
-        getItem: (key: string) => store[key] || null,
-        setItem: (key: string, value: string) => { store[key] = value; },
-        removeItem: (key: string) => { delete store[key]; },
-        clear: () => { Object.keys(store).forEach(k => delete store[k]); }
-      },
-      writable: true
-    });
-
-    // On ajoute un token pour les tests
-    localStorage.setItem('token', 'mock-token');
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule],
+    providers: [
+      ThemeService,
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ]
   });
+  service = TestBed.inject(ThemeService);
+  httpMock = TestBed.inject(HttpTestingController);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ThemeService]
-    });
-    service = TestBed.inject(ThemeService);
-    httpMock = TestBed.inject(HttpTestingController);
-  });
+  // On force un token pour l’interceptor
+  const sessionService = TestBed.inject(SessionService);
+  sessionService.logIn({ token: 'mock-token', username: 'testuser' });
+});
 
   afterEach(() => {
     httpMock.verify();

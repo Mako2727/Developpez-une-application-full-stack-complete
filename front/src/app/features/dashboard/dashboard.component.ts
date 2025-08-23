@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../../core/services/session.service';
 import { User } from 'src/app/shared/models/user.interface';
 import { Router } from '@angular/router';
-
+import { SessionInformation } from 'src/app/shared/models/SessionInformation.interface';
 
 
 
@@ -12,27 +12,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  user: User | null | undefined = null;
+  user: SessionInformation | null = null; // on utilise sessionInformation
   loading = true;
 
-    constructor(private sessionService: SessionService,private router: Router) { }
+  constructor(private sessionService: SessionService, private router: Router) { }
 
   ngOnInit(): void {
-     this.user = this.sessionService.user;
+    // récupérer l'utilisateur depuis sessionInformation
+    this.user = this.sessionService.sessionInformation ?? null;
     this.loading = false;
   }
 
-    goToProfile(): void {
+  goToProfile(): void {
     this.router.navigate(['/me']);  // ou la route que tu veux
   }
 
   logOut(): void {
-       this.user = null;
-    localStorage.removeItem('token'); // supprime le token localement
+    this.user = null;
+    this.sessionService.logOut();       // vide la session correctement
+    localStorage.removeItem('token');   // supprime le token localement
     this.router.navigate(['']); 
-
   }
-
- 
-
 }

@@ -10,25 +10,22 @@ import { MessageResponse } from '../../shared/models/messageResponse.interface';
   providedIn: 'root'
 })
 export class ArticleService {
-      private pathService = environment.baseUrl;
-  constructor(private HttpClient: HttpClient) {}
+  private pathService = environment.baseUrl;
 
- createArticle(article: NewArticle): Observable<MessageResponse> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.HttpClient.post<MessageResponse>(`${this.pathService}api/posts`, article, { headers });
+  constructor(private http: HttpClient) {}  // utilise http, pas HttpClient avec majuscule
+
+  // Création d'article
+  createArticle(article: NewArticle): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(`${this.pathService}api/posts`, article);
   }
 
+  // Récupérer tous les articles
   getAllArticles(): Observable<postDetail[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.HttpClient.get<postDetail[]>(`${this.pathService}api/posts`, { headers });
+    return this.http.get<postDetail[]>(`${this.pathService}api/posts`);
   }
 
-getArticleById(id: number): Observable<postDetail> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-  // utilise l'interpolation pour passer l'id dans l'URL
-  return this.HttpClient.get<postDetail>(`${this.pathService}api/posts/${id}`, { headers });
-}
+  // Récupérer un article par ID
+  getArticleById(id: number): Observable<postDetail> {
+    return this.http.get<postDetail>(`${this.pathService}api/posts/${id}`);
+  }
 }

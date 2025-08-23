@@ -6,26 +6,33 @@ import { ArticleService } from './article.service';
 import { NewArticle } from '../../shared/models/newarticle.interface';
 import { postDetail } from '../../shared/models/postDetail.interface';
 import { MessageResponse } from '../../shared/models/messageResponse.interface';
+import { SessionService } from './session.service';
+import { JwtInterceptor } from './jwt.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 describe('ArticleService', () => {
   let service: ArticleService;
   let httpMock: HttpTestingController;
+  let mockSessionService: Partial<SessionService>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ArticleService]
-    });
-
-    service = TestBed.inject(ArticleService);
-    httpMock = TestBed.inject(HttpTestingController);
-
-    // Simule un token pour l'auth
-    localStorage.setItem('token', 'fake-token');
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule],
+    providers: [
+      ArticleService,
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ]
   });
 
+  service = TestBed.inject(ArticleService);
+  httpMock = TestBed.inject(HttpTestingController);
+
+  // On simule le token dans le SessionService ou localStorage selon ton interceptor
+  localStorage.setItem('sessionInformation', JSON.stringify({ token: 'fake-token', username: 'test' }));
+});
+
   afterEach(() => {
-    httpMock.verify(); // Vérifie qu'aucune requête n'est en attente
+    httpMock.verify();
     localStorage.clear();
   });
 
@@ -33,9 +40,8 @@ describe('ArticleService', () => {
     const newArticle: NewArticle = {
       title: 'Test Article',
       content: 'Contenu test',
-      topicId: 1 // Obligatoire selon l'interface
+      topicId: 1
     };
-
     const mockResponse: MessageResponse = { message: 'Article created' };
 
     service.createArticle(newArticle).subscribe(res => {
@@ -51,24 +57,8 @@ describe('ArticleService', () => {
 
   it('should get all articles', () => {
     const mockArticles: postDetail[] = [
-      {
-        id: 1,
-        title: 'Article 1',
-        content: 'Contenu 1',
-        authorName: 'Auteur 1',
-        topicName: 'Topic 1',
-        createdAt: '2025-08-23',
-        comments: []
-      },
-      {
-        id: 2,
-        title: 'Article 2',
-        content: 'Contenu 2',
-        authorName: 'Auteur 2',
-        topicName: 'Topic 2',
-        createdAt: '2025-08-23',
-        comments: []
-      }
+      { id: 1, title: 'Article 1', content: 'Contenu 1', authorName: 'Auteur 1', topicName: 'Topic 1', createdAt: '2025-08-23', comments: [] },
+      { id: 2, title: 'Article 2', content: 'Contenu 2', authorName: 'Auteur 2', topicName: 'Topic 2', createdAt: '2025-08-23', comments: [] }
     ];
 
     service.getAllArticles().subscribe(res => {
