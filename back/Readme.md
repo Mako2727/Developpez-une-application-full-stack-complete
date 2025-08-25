@@ -116,3 +116,7 @@ ng serve
 npm run test:jest
 
 
+#  Note
+Vous trouverrez dans ressources\sql\script.sql un script d'initialisation de la base de données avec un jeu de test
+
+
