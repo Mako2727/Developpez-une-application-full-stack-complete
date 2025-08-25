@@ -12,19 +12,19 @@ import { MessageResponse } from '../../shared/models/messageResponse.interface';
 export class ArticleService {
   private pathService = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}  // utilise http, pas HttpClient avec majuscule
+  constructor(private http: HttpClient) {}  
 
-  // Création d'article
+
   createArticle(article: NewArticle): Observable<MessageResponse> {
     return this.http.post<MessageResponse>(`${this.pathService}api/posts`, article);
   }
 
-  // Récupérer tous les articles
+
   getAllArticles(): Observable<postDetail[]> {
     return this.http.get<postDetail[]>(`${this.pathService}api/posts`);
   }
 
-  // Récupérer un article par ID
+
   getArticleById(id: number): Observable<postDetail> {
     return this.http.get<postDetail>(`${this.pathService}api/posts/${id}`);
   }

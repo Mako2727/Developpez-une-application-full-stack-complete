@@ -61,7 +61,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onCancel(): void {
-    // Simple redirection vers la liste des articles
+    
     this.router.navigate(['/article']);
   }
 
@@ -77,7 +77,7 @@ export class CreateArticleComponent implements OnInit {
     this.articleService.createArticle(dto).subscribe({
       next: (created) => {
         console.log('Article créé', created);
-        // Redirection vers la liste après création
+       
         this.router.navigate(['/article']);
       },
       error: (err) => console.error('Erreur création article', err)

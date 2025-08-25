@@ -26,7 +26,7 @@ beforeEach(() => {
   service = TestBed.inject(ThemeService);
   httpMock = TestBed.inject(HttpTestingController);
 
-  // On force un token pour l’interceptor
+
   const sessionService = TestBed.inject(SessionService);
   sessionService.logIn({ token: 'mock-token', username: 'testuser' });
 });

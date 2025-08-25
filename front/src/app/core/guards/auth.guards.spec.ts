@@ -15,9 +15,9 @@ describe('AuthGuard', () => {
       navigate: jest.fn()
     };
 
-    // Mock complet de SessionService
+   
     sessionServiceMock = {
-      get isLogged() { return false; } // readonly simulé
+      get isLogged() { return false; } 
     };
 
     guard = new AuthGuard(routerMock as Router, sessionServiceMock as SessionService);
@@ -39,7 +39,7 @@ describe('AuthGuard', () => {
 
   it('should allow activation if token exists and session is logged', () => {
     localStorage.setItem('token', 'fake-token');
-    // Recrée le mock avec isLogged = true
+   
     sessionServiceMock = { get isLogged() { return true; } };
     guard = new AuthGuard(routerMock as Router, sessionServiceMock as SessionService);
 

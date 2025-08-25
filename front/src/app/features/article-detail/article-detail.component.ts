@@ -70,12 +70,12 @@ export class ArticleDetailComponent implements OnInit {
 
   const newComment = { content: this.newComment.trim() };
 
-  // appel du service (à remplacer par commentService si tu en as un)
+
   this.commentService.addComment(this.article.id, newComment).subscribe({
     next: (res) => {
       console.log('Commentaire créé:', res);
-      this.newComment = ''; // reset champ
-      this.loadArticle(this.article.id); // recharger l’article pour voir le nouveau commentaire
+      this.newComment = ''; 
+      this.loadArticle(this.article.id);
     },
     error: (err) => console.error('Erreur création commentaire', err)
   });

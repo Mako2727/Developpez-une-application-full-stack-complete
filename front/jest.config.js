@@ -3,8 +3,8 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   moduleNameMapper: {
     '@core/(.*)': '<rootDir>/src/app/core/$1',
-    '@shared/(.*)': '<rootDir>/src/app/shared/$1', // ajoute si besoin
-    '^src/environments/environment$': '<rootDir>/src/environments/environment.ts' // <- mapping env
+    '@shared/(.*)': '<rootDir>/src/app/shared/$1', 
+    '^src/environments/environment$': '<rootDir>/src/environments/environment.ts' 
   },
   testMatch: ['<rootDir>/src/app/core/**/*.spec.ts'],
   collectCoverage: true,

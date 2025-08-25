@@ -12,18 +12,18 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     const token = localStorage.getItem('token');
 console.log('AuthGuard canActivate', { token, isLogged: this.sessionService.isLogged });
-    // Pas de token → redirection
+    
     if (!token) {
-      this.router.navigate(['']); // redirection vers home
+      this.router.navigate(['']); 
       return false;
     }
 
-    // Si session déjà active → OK
+    
     if (this.sessionService.isLogged) {
       return true;
     }
 
-    // Sinon → potentiellement recharger l'utilisateur depuis /me ici si besoin
+   
     return true;
   }
 }

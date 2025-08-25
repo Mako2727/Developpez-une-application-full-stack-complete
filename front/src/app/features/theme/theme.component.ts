@@ -40,25 +40,25 @@ export class ThemeComponent implements OnInit, AfterViewInit {
 toggleSubscription(theme: Theme): void {
   const currentlySubscribed = theme.subscribed;
   
-  // On inverse immédiatement pour feedback visuel
+
   theme.subscribed = !currentlySubscribed;
 
   if (!currentlySubscribed) {
-    // L'utilisateur s'abonne
+
     this.themeService.subscribe(theme.id).subscribe({
       next: () => console.log(`Abonné au thème "${theme.id}"`),
       error: (err) => {
         console.error('Erreur abonnement', err);
-        theme.subscribed = currentlySubscribed; // rollback
+        theme.subscribed = currentlySubscribed; 
       }
     });
   } else {
-    // L'utilisateur se désabonne
+    
     this.themeService.unsubscribe(theme.id).subscribe({
       next: () => console.log(`Désabonné du thème "${theme.id}"`),
       error: (err) => {
         console.error('Erreur désabonnement', err);
-        theme.subscribed = currentlySubscribed; // rollback
+        theme.subscribed = currentlySubscribed; 
       }
     });
   }

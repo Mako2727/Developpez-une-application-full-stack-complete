@@ -48,12 +48,12 @@ onSubmit(): void {
   const registerRequest = this.registerForm.value;
   this.authService.register(registerRequest).subscribe({
     next: (response: AuthSuccess) => {
-      // Stocke le token dans le localStorage
+  
       localStorage.setItem('token', response.token);
 
-      // Récupère les infos de l'utilisateur
+     
       this.authService.me().subscribe((user: User) => {
-        // Crée un objet compatible SessionInformation
+        
         const sessionInfo = {
           token: response.token,
           username: user.username,

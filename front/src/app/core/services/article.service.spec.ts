@@ -27,7 +27,7 @@ beforeEach(() => {
   service = TestBed.inject(ArticleService);
   httpMock = TestBed.inject(HttpTestingController);
 
-  // On simule le token dans le SessionService ou localStorage selon ton interceptor
+ 
   localStorage.setItem('sessionInformation', JSON.stringify({ token: 'fake-token', username: 'test' }));
 });
 

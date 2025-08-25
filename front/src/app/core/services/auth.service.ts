@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // Inscription
+ 
   public register(registerRequest: RegisterRequest): Observable<AuthSuccess> {
     const url = `${this.pathService}api/auth/register`;
     console.log('URL complète absolue XX:', url);
@@ -27,7 +27,7 @@ export class AuthService {
     return this.httpClient.post<AuthSuccess>(url, registerRequest);
   }
 
-  // Connexion
+ 
   public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
     const url = `${this.pathService}api/auth/login`;
     console.log('URL complète absolue XX:', url);
@@ -39,7 +39,7 @@ public me(): Observable<userMe> {
   return this.httpClient.get<userMe>(`${this.pathService}api/auth/me`);
 }
 
-  // Mise à jour du profil utilisateur
+
   public updateUser(updatedUser: UserUpdate): Observable<userMe> {
     console.log('Données UserUpdate à envoyer:', updatedUser);
     return this.httpClient.put<userMe>(`${this.pathService}api/auth/me`, updatedUser);

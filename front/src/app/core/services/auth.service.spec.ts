@@ -33,7 +33,7 @@ beforeEach(() => {
   service = TestBed.inject(AuthService);
   httpMock = TestBed.inject(HttpTestingController);
 
-  // token pour l'intercepteur
+
   const sessionService = TestBed.inject(SessionService);
   sessionService.logIn({ token: 'mock-token', username: 'mock-user' });
 });
@@ -111,7 +111,7 @@ describe('AuthGuard Integration with fakeAsync', () => {
     sessionService = TestBed.inject(SessionService);
 
     localStorage.clear();
-    sessionService.logOut(); // état initial déconnecté
+    sessionService.logOut(); 
   });
 
   it('should allow access when token exists and session is logged', fakeAsync(() => {
@@ -134,7 +134,7 @@ describe('AuthGuard Integration with fakeAsync', () => {
 
   it('should allow access when token exists but session not logged', fakeAsync(() => {
     localStorage.setItem('token', 'mock-token');
-    sessionService.logOut(); // session inactive
+    sessionService.logOut(); 
 
     const canActivate = guard.canActivate();
     tick();

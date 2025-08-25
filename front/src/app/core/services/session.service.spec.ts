@@ -42,8 +42,8 @@ describe('SessionService', () => {
   });
 
   it('should log out a user', (done) => {
-    service.logIn(mockSession); // login d’abord
-    service.logOut();            // puis logout
+    service.logIn(mockSession); 
+    service.logOut();         
 
     expect(service.sessionInformation).toBeNull();
 

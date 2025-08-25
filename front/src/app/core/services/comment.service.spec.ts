@@ -20,7 +20,7 @@ describe('CommentService', () => {
     service = TestBed.inject(CommentService);
     httpMock = TestBed.inject(HttpTestingController);
 
-    // Mock du token
+  
     localStorage.setItem('token', 'mock-token');
   });
 
@@ -40,7 +40,7 @@ it('should add a comment', () => {
 
   const req = httpMock.expectOne(`${environment.baseUrl}api/posts/comments/${articleId}`);
   expect(req.request.method).toBe('POST');
-  // on retire la vérification du header Authorization
+
   expect(req.request.body).toEqual(mockComment);
 
   req.flush(mockResponse);

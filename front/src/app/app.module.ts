@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-// Angular Material
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -15,9 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 
-// Composants non-standalone
+
 import { AppComponent } from './app.component';
-import { ArticledetailsComponent } from './features/articledetails/articledetails.component';
 import { CreateArticleComponent } from './features/create-article/create-article.component';
 
 import { JwtInterceptor } from './core/services/jwt.interceptor';

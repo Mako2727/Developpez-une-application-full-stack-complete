@@ -24,7 +24,7 @@ export class MeComponent implements OnInit {
   error = false;
   password: string = '';
 
-  // Infos utilisateur
+  
   email: string = '';
   username: string = '';
   successMessage: string | null = null;
@@ -32,8 +32,8 @@ export class MeComponent implements OnInit {
   subscribedThemes: Theme[] = [];
   
 
-  // Thèmes
-  themes: Theme[] = []; // tous les thèmes
+
+  themes: Theme[] = []; 
 
   constructor(
     private router: Router,
@@ -46,7 +46,7 @@ export class MeComponent implements OnInit {
      this.loadSubscribedThemes();
   }
 
-  // --- UTILISATEUR ---
+
   loadUser(): void {
     this.authService.me().subscribe({
       next: (userData: User) => {
@@ -66,7 +66,7 @@ export class MeComponent implements OnInit {
     this.themeService.getSubscribedTheme().subscribe({
       next: (themes: Theme[]) => {
         this.subscribedThemes = themes;
-        console.log('Abonnements récupérés:', themes); // log pour debug
+        console.log('Abonnements récupérés:', themes); 
       },
       error: (err) => {
         console.error('Erreur chargement des abonnements', err);
@@ -106,22 +106,22 @@ export class MeComponent implements OnInit {
  
 toggleSubscription(theme: Theme): void {
   if (theme.subscribed) {
-     // Si actuellement non abonné → on s'abonne
+     
     this.themeService.subscribe(theme.id).subscribe({
       next: () => {
         console.log(`Abonné au thème "${theme.name}"`);
-        this.loadSubscribedThemes(); // rafraîchit la liste
+        this.loadSubscribedThemes();
       },
       error: (err) => {
         console.error('Erreur abonnement', err);
       }
     });
   } else {
-   // Si actuellement abonné → on se désabonne
+  
     this.themeService.unsubscribe(theme.id).subscribe({
       next: () => {
         console.log(`Désabonné du thème "${theme.name}"`);
-        this.loadSubscribedThemes(); // rafraîchit la liste
+        this.loadSubscribedThemes(); 
       },
       error: (err) => {
         console.error('Erreur désabonnement', err);

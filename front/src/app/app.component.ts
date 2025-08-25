@@ -2,7 +2,7 @@ import { Component, HostListener, ChangeDetectorRef } from '@angular/core';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-// Angular Material
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,19 +38,19 @@ constructor(
 ) {
   this.currentUrl = this.router.url;
 
-  // <-- ici, c'est le subscribe qui écoute la navigation
+ 
   this.router.events
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe((event) => {
       const navEnd = event as NavigationEnd;
       this.currentUrl = navEnd.urlAfterRedirects;
       console.log('NavigationEnd:', this.currentUrl);
-      this.cdr.detectChanges(); // force la mise à jour du template
+      this.cdr.detectChanges(); 
     });
 }
   logOut(): void {
     this.sessionService.logOut();
-    this.menuOpen = false; // fermer menu burger si ouvert
+    this.menuOpen = false; 
     this.router.navigate(['']);     
   }
 
@@ -61,11 +61,11 @@ constructor(
   @HostListener('window:resize', ['$event'])
   onResize() {
     if (globalThis.window.innerWidth > 768) {
-      this.menuOpen = false; // ferme menu burger sur grand écran
+      this.menuOpen = false; 
     }
   }
 
-  // Getter pratique pour responsive
+  
   get isMobile(): boolean {
     return globalThis.window.innerWidth <= 768;
   }

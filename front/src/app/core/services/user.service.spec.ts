@@ -20,7 +20,7 @@ describe('UserService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // ✅ Vérifie qu’il ne reste aucune requête non consommée
+    httpMock.verify(); 
   });
 
   it('should retrieve a user by ID', () => {
@@ -34,6 +34,6 @@ describe('UserService', () => {
     const req = httpMock.expectOne(`api/user/${userId}`);
     expect(req.request.method).toBe('GET');
 
-    req.flush(mockUser); // renvoie la réponse mockée
+    req.flush(mockUser); 
   });
 });

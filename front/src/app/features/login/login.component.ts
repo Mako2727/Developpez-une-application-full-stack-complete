@@ -55,33 +55,33 @@ onSubmit(): void {
     next: (response: AuthSuccess) => {
       console.log("Token reçu", response.token);
 
-      // Stocker le token dans localStorage
+    
       localStorage.setItem('token', response.token);
 
-      // Créer une session minimaliste pour que l'interceptor fonctionne immédiatement
+    
       const sessionInfo: SessionInformation = {
         token: response.token,
-        username: '' // temporaire, sera mis à jour
+        username: '' 
       };
       this.sessionService.logIn(sessionInfo);
 
-      // Récupérer les infos utilisateur
+     
       this.authService.me().subscribe({
         next: (user: User) => {
           console.log('Infos utilisateur récupérées :', user);
 
-          // Mettre à jour sessionInfo avec les infos réelles
+          
           sessionInfo.username = user.username;
-          sessionInfo.id = undefined; // si besoin ou user.id si disponible
-          this.sessionService.logIn(sessionInfo); // mise à jour complète
+          sessionInfo.id = undefined; 
+          this.sessionService.logIn(sessionInfo);
 
-          // Navigation après avoir tout mis à jour
+         
           this.router.navigate(['/article']);
         },
         error: (err) => {
           console.error('Erreur récupération utilisateur me():', err);
           this.onError = true;
-          // On pourrait rediriger ou déconnecter l’utilisateur si me() échoue
+        
         }
       });
     },

@@ -41,7 +41,7 @@ subscribe(topicId: number): Observable<MessageResponse> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-  const url = `${this.pathService}api/topics/${topicId}/subscribe`; // injecte l'id
+  const url = `${this.pathService}api/topics/${topicId}/subscribe`; 
   console.log('URL complète:', url);
   console.log('Token envoyé:', token);
 
@@ -53,7 +53,7 @@ unsubscribe(topicId: number): Observable<string> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-  const url = `${this.pathService}api/topics/${topicId}`; // injecte l'id
+  const url = `${this.pathService}api/topics/${topicId}`; 
   console.log('URL complète:', url);
   console.log('Token envoyé:', token);
 

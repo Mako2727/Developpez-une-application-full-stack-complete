@@ -14,7 +14,7 @@ describe('JwtInterceptor', () => {
   let sessionServiceMock: Partial<SessionService>;
 
   beforeEach(() => {
-    // On crée un mock pour sessionService avec un getter sur sessionInformation
+   
     sessionServiceMock = {};
     Object.defineProperty(sessionServiceMock, 'sessionInformation', {
       get: () => ({ token: 'mock-token', username: 'testuser' })
