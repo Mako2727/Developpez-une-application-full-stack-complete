@@ -46,7 +46,7 @@ class PostServiceImplTest {
 void setUp() {
     MockitoAnnotations.openMocks(this);
     postService = new PostServiceImpl(postRepository, topicRepository, userRepository, postMapper);
-    // Injection manuelle du JwtUtil mocké
+    
     java.lang.reflect.Field jwtField;
     try {
         jwtField = PostServiceImpl.class.getDeclaredField("jwtUtil");
@@ -132,7 +132,7 @@ void setUp() {
         post.setTopic(topic);
         post.setCreatedAt(LocalDateTime.now());
         post.setUpdatedAt(LocalDateTime.now());
-        post.setComments(Collections.emptyList()); // éviter NPE
+        post.setComments(Collections.emptyList()); 
 
         when(postRepository.findById(1L)).thenReturn(Optional.of(post));
 

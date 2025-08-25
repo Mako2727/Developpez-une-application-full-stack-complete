@@ -35,7 +35,7 @@ public class AuthServiceImpl implements AuthService {
 
 public String login(String loginField, String password) {
 
-    // L'AuthenticationManager va utiliser ton CustomUserDetailsService
+   
     Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginField, password));
 
     CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
@@ -44,7 +44,7 @@ public String login(String loginField, String password) {
 
   public String register(RegisterDTO request) {
     if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-      //throw new IllegalArgumentException("Email déjà utilisé");
+      
       String message="Email déjà utilisé";
       System.out.println("email..."+request.getEmail());
       return message;
@@ -81,13 +81,13 @@ public String login(String loginField, String password) {
        User   user = userRepository.findByEmail(authUser.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
-        // Vérifier que le nouvel email n'est pas déjà pris par un autre user
+        
         if (!user.getEmail().equals(updateDTO.getEmail()) &&
             userRepository.findByEmail(updateDTO.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Email déjà utilisé");
         }
 
-        // Modifier les champs
+        
         user.setEmail(updateDTO.getEmail());
         user.setUsername(updateDTO.getUsername());
 
@@ -97,7 +97,7 @@ public String login(String loginField, String password) {
 
         userRepository.save(user);
 
-        // Retourner le profil à jour
+       
         List<String> subscriptions = user.getSubscriptions() == null ? List.of() :
             user.getSubscriptions().stream()
                 .map(sub -> sub.getTopic().getName())

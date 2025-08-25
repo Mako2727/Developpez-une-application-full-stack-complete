@@ -43,10 +43,10 @@ class CommentServiceImplTest {
     void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
 
-        // Injection via constructeur
+        
         commentService = new CommentServiceImpl(commentRepository, userRepository, postRepository);
 
-        // Injection manuelle du mock JwtUtil dans le champ @Autowired
+       
         Field jwtUtilField = CommentServiceImpl.class.getDeclaredField("jwtUtil");
         jwtUtilField.setAccessible(true);
         jwtUtilField.set(commentService, jwtUtil);
@@ -63,19 +63,19 @@ class CommentServiceImplTest {
         Post post = new Post();
         post.setId(postId);
 
-        // Mock JwtUtil pour retourner l'utilisateur connecté
+       
         when(jwtUtil.getUserFromAuthent(authentication)).thenReturn(user);
 
-        // Mock UserRepository
+       
         when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
 
-        // Mock PostRepository
+        
         when(postRepository.findById(postId)).thenReturn(Optional.of(post));
 
-        // Appel de la méthode
+       
         commentService.addComment(authentication, postId, content);
 
-        // Vérifie que le commentaire a été sauvegardé
+        
         ArgumentCaptor<Comment> captor = ArgumentCaptor.forClass(Comment.class);
         verify(commentRepository).save(captor.capture());
 

@@ -26,7 +26,7 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 public class JwtUtil {
      private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-  private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 heures
+  private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; 
  @Autowired private UserRepository userRepository;
   public String generateToken(User user) {
     Map<String, Object> claims = new HashMap<>();

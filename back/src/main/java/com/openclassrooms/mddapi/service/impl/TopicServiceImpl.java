@@ -82,7 +82,7 @@ public class TopicServiceImpl  implements TopicService{
         boolean alreadySubscribed = subscriptionRepository.existsByUserAndTopic(user, topic);
 
         if (alreadySubscribed) {
-            //throw new IllegalStateException("Vous êtes déjà abonné à ce thème");
+           
             message="Vous êtes déjà abonné à ce thème";
             return message;
         }

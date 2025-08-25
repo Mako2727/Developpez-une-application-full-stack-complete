@@ -23,10 +23,10 @@ import com.openclassrooms.mddapi.springSecurity.jwtRequestFilter;
 @ActiveProfiles("test")
 public class JwtRequestFilterIntegrationTest {
 
-    // Sous-classe test-only pour exposer doFilterInternal
+    
     private static class TestJwtRequestFilter extends jwtRequestFilter {
         public TestJwtRequestFilter(JwtUtil jwtUtil) {
-            super(jwtUtil); // appel explicite au constructeur existant
+            super(jwtUtil); 
         }
 
         public void doFilterPublic(MockHttpServletRequest request,
@@ -49,23 +49,23 @@ public class JwtRequestFilterIntegrationTest {
 
     @BeforeEach
     public void setup() {
-        // Création du filter test en passant JwtUtil
+       
         jwtFilter = new TestJwtRequestFilter(jwtUtil);
 
-        // Injection d'un UserDetailsService minimal pour le test
+       
         jwtFilter.setUserDetailsService(username -> {
             User u = userRepository.findByEmail(username).orElseThrow();
             return new CustomUserDetails(u);
         });
 
-        // Création d'un utilisateur test
+      
         user = new User();
         user.setEmail("user@test.com");
         user.setUsername("TestUser");
         user.setPassword("password123");
         userRepository.save(user);
 
-        // Génération d'un token JWT pour l'utilisateur
+     
         token = jwtUtil.generateToken(user);
     }
 
@@ -77,10 +77,10 @@ public class JwtRequestFilterIntegrationTest {
 
         request.addHeader("Authorization", "Bearer " + token);
 
-        // Exécuter le filter via la méthode publique test-only
+       
         jwtFilter.doFilterPublic(request, response, filterChain);
 
-        // Vérifier que le SecurityContext contient bien l'authentification
+       
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         assertNotNull(auth);
         assertTrue(auth.getPrincipal() instanceof CustomUserDetails);

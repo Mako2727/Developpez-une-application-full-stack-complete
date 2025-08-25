@@ -41,21 +41,21 @@ class UserServiceImplTest {
 
         userService = new UserServiceImpl(userRepository);
 
-        // Création d'un utilisateur fictif
+        
         testUser = new User();
         testUser.setId(1L);
         testUser.setUsername("testuser");
         testUser.setEmail("test@example.com");
         testUser.setPassword("password");
 
-        // Mock SecurityContextHolder
+        
         when(securityContext.getAuthentication()).thenReturn(authentication);
         SecurityContextHolder.setContext(securityContext);
     }
 
     @Test
     void testGetCurrentUser_success() {
-        // Mock Authentication.getName()
+       
         when(authentication.getName()).thenReturn(testUser.getUsername());
         when(userRepository.findByUsername(testUser.getUsername())).thenReturn(Optional.of(testUser));
 

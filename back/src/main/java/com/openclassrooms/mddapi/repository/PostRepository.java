@@ -11,7 +11,7 @@ import com.openclassrooms.mddapi.model.Topic;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    // Récupère tous les posts d'une liste de topics, triés du plus récent au plus ancien
+    
     List<Post> findByTopicInOrderByCreatedAtDesc(List<Topic> topics);
     List<Post> findByTopicInOrderByCreatedAtAsc(List<Topic> topics);
 }

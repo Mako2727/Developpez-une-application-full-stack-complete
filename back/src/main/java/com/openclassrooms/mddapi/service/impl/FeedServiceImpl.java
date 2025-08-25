@@ -34,29 +34,29 @@ public class FeedServiceImpl implements FeedService {
     public List<PostDTO> getUserFeed(Authentication authentication, String sortOrder) {
          User authUser=   jwtUtil.getUserFromAuthent(authentication);  
 
-        // Récupérer les topics auxquels l'utilisateur est abonné
+       
         List<Topic> subscribedTopics = authUser.getSubscriptions()
                 .stream()
                 .map(Subscription::getTopic)
                 .collect(Collectors.toList());
 
         if (subscribedTopics.isEmpty()) {
-            return List.of(); // Aucun abonnement → fil vide
+            return List.of(); 
         }
 
 
  List<Post> posts;
            if ("asc".equalsIgnoreCase(sortOrder)) {
-         // Récupérer les posts liés à ces topics, triés du plus récent au plus ancien
+         
        posts = postRepository.findByTopicInOrderByCreatedAtDesc(subscribedTopics);
     } else {
-        // default desc
+        
       posts = postRepository.findByTopicInOrderByCreatedAtAsc(subscribedTopics);
     }
 
       
 
-        // Transformer en DTO (éviter de renvoyer l'entité brute)
+       
         return posts.stream()
                 .map(post -> new PostDTO(
                         post.getId(),

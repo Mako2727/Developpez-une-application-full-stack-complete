@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // génère getters/setters, equals, hashCode, toString
-@NoArgsConstructor // constructeur vide
-@AllArgsConstructor // constructeur complet
+@Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
 public class PostDTO {
     private Long id;
     private String title;

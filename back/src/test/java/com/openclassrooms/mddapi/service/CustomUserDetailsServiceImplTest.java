@@ -37,13 +37,13 @@ class CustomUserDetailsServiceImplTest {
         user.setEmail("test@example.com");
         user.setPassword("password");
 
-        // Mock repository
+        
         when(userRepository.findByUsernameOrEmail(login)).thenReturn(Optional.of(user));
 
-        // Appel de la méthode
+       
         CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(login);
 
-        // Vérification
+        
         assertNotNull(userDetails);
         assertEquals(user.getUsername(), userDetails.getUsername());
         assertEquals(user.getPassword(), userDetails.getPassword());

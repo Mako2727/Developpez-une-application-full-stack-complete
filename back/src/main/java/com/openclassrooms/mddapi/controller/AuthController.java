@@ -34,8 +34,7 @@ public class AuthController {
    @Operation(summary = "Creation d un utilisateur")
   @PostMapping("/register")
   public ResponseEntity<Map<String, String>> register(@Valid @RequestBody RegisterDTO request) {
-    //affichage des parametres
-      // Si ton DTO n’a pas de toString(), tu peux afficher champ par champ
+   
     System.out.println("username = " + request.getUsername());
     System.out.println("email = " + request.getEmail());
     System.out.println("password = " + request.getPassword());

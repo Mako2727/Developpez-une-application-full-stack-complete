@@ -42,14 +42,14 @@ class FeedServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        // Injection manuelle du JwtUtil mocké dans le champ private
+        
         ReflectionTestUtils.setField(feedService, "jwtUtil", jwtUtil);
     }
 
     @Test
     void testGetUserFeed_noSubscriptions() {
         User user = new User();
-        user.setSubscriptions(List.of()); // pas d'abonnement
+        user.setSubscriptions(List.of()); 
 
         when(jwtUtil.getUserFromAuthent(authentication)).thenReturn(user);
 
@@ -61,7 +61,7 @@ class FeedServiceImplTest {
 
    @Test
 void testGetUserFeed_ascOrder() {
-    // Préparer l'utilisateur et ses abonnements
+    
     User user = new User();
     Subscription subscription = new Subscription();
     Topic topic = new Topic();
@@ -75,17 +75,17 @@ void testGetUserFeed_ascOrder() {
     post.setContent("Contenu");
     post.setTopic(topic);
 
-    // Mock JwtUtil pour retourner l'utilisateur connecté
+    
     when(jwtUtil.getUserFromAuthent(authentication)).thenReturn(user);
 
-    // Mock PostRepository pour la méthode réellement appelée pour "asc"
+    
     when(postRepository.findByTopicInOrderByCreatedAtDesc(List.of(topic)))
             .thenReturn(List.of(post));
 
-    // Appel de la méthode à tester
+    
     List<PostDTO> feed = feedService.getUserFeed(authentication, "asc");
 
-    // Assertions
+    
     assertNotNull(feed);
     assertEquals(1, feed.size());
     assertEquals("Post 1", feed.get(0).getTitle());

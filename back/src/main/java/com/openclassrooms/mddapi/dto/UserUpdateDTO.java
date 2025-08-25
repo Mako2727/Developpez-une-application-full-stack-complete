@@ -6,7 +6,7 @@ public class UserUpdateDTO {
     private String username;
     private String password;
 
-    // Constructeurs, getters, setters
+    
     public UserUpdateDTO() {}
 
     public String getEmail() { return email; }

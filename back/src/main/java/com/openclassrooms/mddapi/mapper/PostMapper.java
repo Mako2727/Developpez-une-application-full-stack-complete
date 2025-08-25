@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PostMapper {
 
-    @Mapping(source = "author.username", target = "authorName") // User a une propriété username
-    @Mapping(source = "topic.name", target = "topicName")       // Topic a une propriété name
+    @Mapping(source = "author.username", target = "authorName") 
+    @Mapping(source = "topic.name", target = "topicName")       
     PostDetailDTO toDetailDTO(Post post);
 
     List<PostDetailDTO> toDetailDTOList(List<Post> posts);

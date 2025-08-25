@@ -46,7 +46,7 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http, jwtRequestFilter jwtRequestFilter)
       throws Exception {
 
-   http.cors() // <-- active CORS pour que le WebMvcConfigurer soit pris en compte
+   http.cors() 
         .and()
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/auth/**", "/swagger-ui/**", "/v3/api-docs/**","/swagger-ui.html").permitAll()

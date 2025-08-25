@@ -30,7 +30,7 @@ class SecurityConfigTest {
 
     @Test
     void contextLoads() {
-        // Vérifie que tous les beans principaux sont correctement créés
+        
         assertThat(securityFilterChain).isNotNull();
         assertThat(authenticationManager).isNotNull();
         assertThat(passwordEncoder).isNotNull();

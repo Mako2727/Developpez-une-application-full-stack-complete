@@ -60,7 +60,7 @@ void testCreateTopic_success() {
     dto.setName("Nouveau Topic");
     dto.setDescription("Description Topic");
 
-    // ✅ Créer un CustomUserDetails avec testUser
+    
     CustomUserDetails customUserDetails = new CustomUserDetails(testUser);
 
     when(authentication.getPrincipal()).thenReturn(customUserDetails);
@@ -68,7 +68,7 @@ void testCreateTopic_success() {
 
     String message = topicService.createTopic(authentication, dto);
 
-    assertEquals("Le Topic vient d etre créé", message); // correspond au service
+    assertEquals("Le Topic vient d etre créé", message); 
     verify(topicRepository, times(1)).save(any(Topic.class));
 }
 
@@ -118,7 +118,7 @@ void testCreateTopic_success() {
         when(jwtUtil.getUserFromAuthent(authentication)).thenReturn(testUser);
         when(userRepository.findByEmail(testUser.getEmail())).thenReturn(Optional.of(testUser));
         when(topicRepository.findAll()).thenReturn(List.of(topic1));
-        testUser.setSubscriptions(List.of()); // éviter NullPointerException
+        testUser.setSubscriptions(List.of()); 
 
         var topics = topicService.getAllTopicsWithSubscriptionStatus(authentication);
 

@@ -53,7 +53,7 @@ class JwtUtilTest {
         assertEquals(testUser.getEmail(), email);
 
         String username = jwtUtil.extractUsername(token);
-        assertEquals(testUser.getEmail(), username); // car extractUsername utilise Claims::getSubject
+        assertEquals(testUser.getEmail(), username); 
     }
 
     @Test

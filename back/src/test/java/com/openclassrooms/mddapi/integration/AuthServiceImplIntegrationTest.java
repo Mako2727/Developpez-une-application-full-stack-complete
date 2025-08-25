@@ -37,19 +37,19 @@ public class AuthServiceImplIntegrationTest {
 
     @BeforeEach
     public void setup() {
-        // Création d'un utilisateur test
+        
         User testUser = new User();
         testUser.setEmail("user@test.com");
         testUser.setUsername("TestUser");
-        testUser.setPassword("password123"); // Le password sera encodé dans AuthServiceImpl si nécessaire
-        testUser.setSubscriptions(List.of()); // Important pour éviter NullPointerException
+        testUser.setPassword("password123"); 
+        testUser.setSubscriptions(List.of()); 
         userRepository.save(testUser);
     }
 
     @Test
     public void testGetCurrentUser_shouldReturnUserMeDTO() {
         User user = userRepository.findByEmail("user@test.com").orElseThrow();
-        CustomUserDetails userDetails = new CustomUserDetails(user); // <-- correction ici
+        CustomUserDetails userDetails = new CustomUserDetails(user); 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
 
         UserMeDTO dto = authService.getCurrentUser(authentication);
@@ -79,7 +79,7 @@ public class AuthServiceImplIntegrationTest {
     @Test
     public void testRegister_existingEmail_shouldReturnMessage() {
         RegisterDTO dto = new RegisterDTO();
-        dto.setEmail("user@test.com"); // Email déjà utilisé
+        dto.setEmail("user@test.com"); 
         dto.setUsername("AnotherUser");
         dto.setPassword("pass");
 

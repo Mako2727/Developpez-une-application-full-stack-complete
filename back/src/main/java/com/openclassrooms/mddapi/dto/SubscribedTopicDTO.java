@@ -37,7 +37,7 @@ public class SubscribedTopicDTO {
         public void setUsername(String username) { this.username = username; }
     }
 
-    // getters / setters pour SubscribedTopicDTO
+   
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }
