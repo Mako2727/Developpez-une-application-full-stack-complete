@@ -1,25 +1,122 @@
-# P6-Full-Stack-reseau-dev
+Projet MDD Full-Stack
 
-## Front
+Présentation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Application full-stack composée de :
 
-Don't forget to install your node_modules before starting (`npm install`).
+* Back-end : Spring Boot 
+* Front-end : Angular 
 
-### Development server
+## Fonctionnalités principales
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Gestion des utilisateurs**
+  - Inscription et connexion via e-mail ou nom d’utilisateur et mot de passe.
+  - Consultation et modification du profil (e-mail, nom d’utilisateur, mot de passe).
+  - Déconnexion.
 
-### Build
+- **Authentification JWT**
+  - Sécurisation des endpoints REST.
+  - Gestion des tokens pour persistance des sessions.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Gestion des abonnements**
+  - Consultation de tous les thèmes disponibles.
+  - Abonnement et désabonnement aux thèmes.
+  - Fil d’actualité personnalisé selon les abonnements.
 
-### Where to start
+- **API REST documentée via Swagger UI**
+  - Documentation interactive de tous les endpoints.
+  - Test des appels REST directement depuis l’interface Swagger ou postman.
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+Back-end (Spring Boot)
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+Nom du projet : mdd-api
+Java : 17
+Spring Boot : 3.5.0
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get rid of it.
+Stack & dépendances
 
-Good luck!
+* Spring Data JPA
+* Spring Security
+* MySQL (runtime)
+* H2 (tests en mémoire)
+* JWT (io.jsonwebtoken 0.11.5)
+* MapStruct (1.5.5.Final)
+* Lombok (1.18.34)
+* OpenAPI / Swagger UI (springdoc-openapi-starter-webmvc-ui 2.7.0)
+
+Tests & couverture
+
+* Les test sont réalisés avec JUNIT
+* Pour lanver les tests : mvn test  
+
+Lancer le back-end
+
+mvn clean install
+mvn spring-boot:run
+
+* API : http://localhost:3001
+* Swagger UI : http://localhost:3001/swagger-ui/index.html
+
+
+
+Front-end (Angular)
+
+Nom du projet : front
+Angular : 14.1.3
+UI : Angular Material (14.2.5) + Flex Layout (14.0.0-beta.40) + RxJS (7.5.0)
+
+
+Tests
+
+* Jest (jest)
+* Pour lancer les tests lancer la commande : npm run test:jest
+
+
+
+Lancer le front-end
+
+    Installer les dépendances : npm install
+    Lancer l'application : npm start
+
+* Application accessible sur : http://localhost:4200
+
+Authentification
+
+* JWT pour sécuriser les endpoints
+
+Documentation
+
+* API documentée via Swagger UI :http://localhost:8080/swagger-ui/index.html
+
+Scripts utiles
+
+Back-end
+
+# Compiler et packager
+
+mvn clean install
+
+# Lancer l'application
+
+mvn spring-boot\:run
+
+
+Front-end
+
+# Installer dépendances
+
+npm install
+
+# Lancer le serveur
+
+ng serve 
+
+# Tests unitaires avec Jest
+
+npm run test:jest
+
+
+#  Note
+Vous trouverrez dans ressources\sql\script.sql un script d'initialisation de la base de données avec un jeu de test
+
+

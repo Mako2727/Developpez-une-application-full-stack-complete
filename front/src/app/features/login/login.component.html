@@ -1,22 +1,19 @@
-
-
+<div class="back-container">
+  <span class="back-arrow" (click)="goBack()">←</span>
+</div>
 
 <div class="register-container">
   <div class="header-with-back">
-    <span class="back-arrow" (click)="goBack()">←</span>
     <h2>Se connecter</h2>
   </div>
 
-  
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label for="email">E-mail ou nom d'utilisateur</label>
+    <input id="email" type="text" placeholder="E-mail ou nom d'utilisateur" formControlName="email" />
 
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" placeholder="Entrez votre mot de passe" formControlName="password" />
 
-  <label for="email">E-mail ou nom d'utilisateur</label>
-  <input id="email" type="text" placeholder="E-mail ou nom d'utilisateur" formControlName="email" />
-
-  <label for="password">Mot de passe</label>
-  <input id="password" type="password" placeholder="Entrez votre mot de passe" formControlName="password" />
-
-  <button type="submit" [disabled]="registerForm.invalid">Se connecter</button>
-</form>
+    <button type="submit" [disabled]="registerForm.invalid">Se connecter</button>
+  </form>
 </div>

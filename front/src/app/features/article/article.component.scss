@@ -23,7 +23,7 @@
 /* Container des articles */
 .articles-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne par défaut */
   gap: 16px;
   justify-content: center;
   padding: 16px;
@@ -46,31 +46,23 @@
   font-size: 0.85rem;
   color: gray;
   margin-bottom: 8px;
+  width: 100%;
 }
 
 .date {
+  flex: 1;
   text-align: left;
 }
 
 .author {
+  flex: 1;
   text-align: right;
+  white-space: nowrap; /* empêche le retour à la ligne */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Responsive : 2 cartes par ligne sur tablettes et desktop */
-@media (min-width: 600px) and (max-width: 1023px) {
-  .articles-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Responsive : 3 cartes par ligne sur écrans larges */
-@media (min-width: 1024px) {
-  .articles-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Responsive mobile : 1 carte par ligne */
+/* Responsive : 1 carte par ligne sur mobile */
 @media (max-width: 599px) {
   .articles-container {
     grid-template-columns: 1fr;
@@ -84,32 +76,31 @@
   }
 
   .articles-header {
+    justify-content: center;
     margin: 0 8px 12px 8px;
   }
 
   .sort-button {
     font-size: 0.9rem;
     padding: 3px 6px;
+    text-align: center;
   }
 
   .article-card {
     max-width: 100%;
     padding: 8px;
   }
-}
-@media (max-width: 599px) {
+
   .create-article-wrapper {
     display: flex;
     justify-content: center;
     margin-bottom: 16px; 
   }
+}
 
-  .articles-header {
-    justify-content: center; 
-    margin-bottom: 16px;
-  }
-
-  .sort-button {
-    text-align: center;
-  }
+/* Optionnel : hover sur cartes */
+.article-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
