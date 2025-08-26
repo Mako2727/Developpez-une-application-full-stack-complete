@@ -22,16 +22,12 @@ export class AuthService {
  
   public register(registerRequest: RegisterRequest): Observable<AuthSuccess> {
     const url = `${this.pathService}api/auth/register`;
-    console.log('URL complète absolue XX:', url);
-    console.log("JSON envoyé :", JSON.stringify(registerRequest));
     return this.httpClient.post<AuthSuccess>(url, registerRequest);
   }
 
  
   public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
     const url = `${this.pathService}api/auth/login`;
-    console.log('URL complète absolue XX:', url);
-    console.log("JSON envoyé :", JSON.stringify(loginRequest));
     return this.httpClient.post<AuthSuccess>(url, loginRequest);
   }
 
@@ -41,7 +37,6 @@ public me(): Observable<userMe> {
 
 
   public updateUser(updatedUser: UserUpdate): Observable<userMe> {
-    console.log('Données UserUpdate à envoyer:', updatedUser);
     return this.httpClient.put<userMe>(`${this.pathService}api/auth/me`, updatedUser);
   }
 }

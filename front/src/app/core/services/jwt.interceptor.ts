@@ -16,7 +16,7 @@ intercept(request: HttpRequest<any>, next: HttpHandler) {
       }
     });
   }
-  console.log('Requête finale avec headers :', request.url, request.headers.keys(), request.headers.get('Authorization'));
+
 
   return next.handle(request);
 }

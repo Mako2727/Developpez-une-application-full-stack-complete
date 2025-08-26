@@ -50,7 +50,6 @@ this.router.navigate(['/createarticle']);
   }
 
 openArticleDetail(article: postDetail): void {
-  console.log('Naviguer vers ArticleDetail pour id :', article.id);
 this.router.navigate(['/articleDetail', article.id]);
 }
 

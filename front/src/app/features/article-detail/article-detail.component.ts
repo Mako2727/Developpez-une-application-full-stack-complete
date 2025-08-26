@@ -42,9 +42,7 @@ export class ArticleDetailComponent implements OnInit {
   
 
   ngOnInit(): void {
-   console.log('ici.... :');
    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('ArticleDetail ngOnInit', id)
     this.loadArticle(id);
   }
 
@@ -59,21 +57,17 @@ export class ArticleDetailComponent implements OnInit {
    this.router.navigate(['/article']);
 }
  sendComment(): void {
-     console.log('avant validation:', this.newComment);
 
   if (!this.newComment || !this.newComment.trim()) {
-    console.log('Formulaire invalide, contenu vide:', this.newComment);
     return;
   }
 
-  console.log('après validation:', this.newComment);
 
   const newComment = { content: this.newComment.trim() };
 
 
   this.commentService.addComment(this.article.id, newComment).subscribe({
     next: (res) => {
-      console.log('Commentaire créé:', res);
       this.newComment = ''; 
       this.loadArticle(this.article.id);
     },

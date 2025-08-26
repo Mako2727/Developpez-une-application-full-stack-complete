@@ -16,9 +16,6 @@ getThemes(): Observable<Theme[]> {
   const token = localStorage.getItem('token');
   const url = `${this.pathService}api/topics`;
   
-  console.log('URL complète:', url);
-  console.log('Token envoyé:', token);
-  
   const headers = new HttpHeaders({'Authorization': `Bearer ${token}`  });
 return this.httpClient.get<Theme[]>(`${this.pathService}api/topics`);
 
@@ -27,10 +24,6 @@ return this.httpClient.get<Theme[]>(`${this.pathService}api/topics`);
 getAllThemes(): Observable<Theme[]> {
   const token = localStorage.getItem('token');
   const url = `${this.pathService}api/topics`;
-  
-  console.log('URL complète:', url);
-  console.log('Token envoyé:', token);
-  
   const headers = new HttpHeaders({'Authorization': `Bearer ${token}`  });
 return this.httpClient.get<Theme[]>(`${this.pathService}api/topics`);
 
@@ -42,8 +35,6 @@ subscribe(topicId: number): Observable<MessageResponse> {
   const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
   const url = `${this.pathService}api/topics/${topicId}/subscribe`; 
-  console.log('URL complète:', url);
-  console.log('Token envoyé:', token);
 
   return this.httpClient.post<MessageResponse>(url,{});
 
@@ -54,9 +45,6 @@ unsubscribe(topicId: number): Observable<string> {
   const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
   const url = `${this.pathService}api/topics/${topicId}`; 
-  console.log('URL complète:', url);
-  console.log('Token envoyé:', token);
-
   return this.httpClient.delete<string>(url);
 
 }
@@ -65,9 +53,6 @@ unsubscribe(topicId: number): Observable<string> {
 getSubscribedTheme(): Observable<Theme[]> {
   const token = localStorage.getItem('token');
   const url = `${this.pathService}api/topics`;
-  
-  console.log('URL complète:', url);
-  console.log('Token envoyé:', token);
   
   const headers = new HttpHeaders({'Authorization': `Bearer ${token}`  });
 return this.httpClient.get<Theme[]>(`${this.pathService}api/topics/subscribed`);

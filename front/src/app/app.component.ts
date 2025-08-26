@@ -44,7 +44,6 @@ constructor(
     .subscribe((event) => {
       const navEnd = event as NavigationEnd;
       this.currentUrl = navEnd.urlAfterRedirects;
-      console.log('NavigationEnd:', this.currentUrl);
       this.cdr.detectChanges(); 
     });
 }

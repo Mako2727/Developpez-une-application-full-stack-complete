@@ -35,9 +35,7 @@ public class AuthController {
   @PostMapping("/register")
   public ResponseEntity<Map<String, String>> register(@Valid @RequestBody RegisterDTO request) {
    
-    System.out.println("username = " + request.getUsername());
-    System.out.println("email = " + request.getEmail());
-    System.out.println("password = " + request.getPassword());
+
 
     String token = authService.register(request);
     return ResponseEntity.ok(Map.of("token", token));

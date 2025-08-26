@@ -54,7 +54,6 @@ export class CreateArticleComponent implements OnInit {
     this.themeService.getThemes().subscribe({
       next: (data: Theme[]) => {
         this.themes = data;
-        console.log('Thèmes reçus :', this.themes);
       },
       error: err => console.error('Erreur chargement thèmes', err)
     });
@@ -76,7 +75,6 @@ export class CreateArticleComponent implements OnInit {
 
     this.articleService.createArticle(dto).subscribe({
       next: (created) => {
-        console.log('Article créé', created);
        
         this.router.navigate(['/article']);
       },

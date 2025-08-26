@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('LoginComponent loaded');
     this.registerForm = this.fb.group({    
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(3)]]
@@ -47,13 +46,10 @@ export class LoginComponent implements OnInit {
 
 onSubmit(): void {
   if (!this.registerForm.valid) return;
-
-  console.log("Submit login");
   const loginRequest: LoginRequest = this.registerForm.value; 
 
   this.authService.login(loginRequest).subscribe({
     next: (response: AuthSuccess) => {
-      console.log("Token reçu", response.token);
 
     
       localStorage.setItem('token', response.token);
@@ -68,7 +64,6 @@ onSubmit(): void {
      
       this.authService.me().subscribe({
         next: (user: User) => {
-          console.log('Infos utilisateur récupérées :', user);
 
           
           sessionInfo.username = user.username;

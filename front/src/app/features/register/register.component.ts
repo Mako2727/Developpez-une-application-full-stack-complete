@@ -9,6 +9,7 @@ import { SessionService } from 'src/app/core/services/session.service';
 import { AuthService } from '../../core/services/auth.service';
 import { AuthSuccess } from '../../shared/models/authSuccess.interface';
 import { User } from 'src/app/shared/models/user.interface';
+import { SessionInformation } from 'src/app/shared/models/SessionInformation.interface';
 
 @Component({
   selector: 'app-register',
@@ -44,28 +45,39 @@ export class RegisterComponent implements OnInit {
 
 onSubmit(): void {
   if (!this.registerForm.valid) return;
-
   const registerRequest = this.registerForm.value;
+
   this.authService.register(registerRequest).subscribe({
     next: (response: AuthSuccess) => {
-  
+      
       localStorage.setItem('token', response.token);
 
-     
-      this.authService.me().subscribe((user: User) => {
-        
-        const sessionInfo = {
-          token: response.token,
-          username: user.username,
-          email: user.email
-        };
+      
+      const sessionInfo: SessionInformation = {
+        token: response.token,
+        username: ''
+      };
+      this.sessionService.logIn(sessionInfo);
 
-        this.sessionService.logIn(sessionInfo);
-        console.log("Token et session enregistrés", sessionInfo);
-        this.router.navigate(['/dashboard']);
+      
+      this.authService.me().subscribe({
+        next: (user: User) => {
+          sessionInfo.username = user.username;
+          this.sessionService.logIn(sessionInfo);
+
+          
+          this.router.navigate(['/article']);
+        },
+        error: (err) => {
+          console.error('Erreur récupération utilisateur me():', err);
+          this.onError = true;
+        }
       });
     },
-    error: () => this.onError = true
+    error: (err) => {
+      console.error('Erreur inscription:', err);
+      this.onError = true;
+    }
   });
 }
 
