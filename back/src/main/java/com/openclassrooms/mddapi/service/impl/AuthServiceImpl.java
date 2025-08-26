@@ -46,7 +46,6 @@ public String login(String loginField, String password) {
     if (userRepository.findByEmail(request.getEmail()).isPresent()) {
       
       String message="Email déjà utilisé";
-      System.out.println("email..."+request.getEmail());
       return message;
     }
 

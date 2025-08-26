@@ -117,6 +117,12 @@ npm run test:jest
 
 
 #  Note
-Vous trouverrez dans ressources\sql\script.sql un script d'initialisation de la base de données avec un jeu de test
+Lorsque vous lancerrez l'application pour la premiére fois. 
+JPA contruira la base de données grace à la couche model, une fois cela réalisé, il vous faudra initialiser l'application avec une jeu de test notemment les valeurs des themes.
+Pour cela vous trouverrez dans ressources\sql\scriptInitialisation.sql un script d'initialisation de la base de données.
+Celui-ci permet de créer un utilisateur puis un ensemble de theme qui serviront d'exemple dans l'application.
+L'utilisateur de test est 
+email -> mariusxx@123.fr
+password -> Test1234!
 
 

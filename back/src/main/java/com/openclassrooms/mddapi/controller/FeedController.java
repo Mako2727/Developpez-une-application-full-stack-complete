@@ -24,7 +24,6 @@ public class FeedController {
 
     @GetMapping("/feed")
     public ResponseEntity<List<PostDTO>> getUserFeed(Authentication authentication,@RequestParam(defaultValue = "desc") String sort) {
-System.out.println("sort =="+sort);
         List<PostDTO> feed = feedService.getUserFeed(authentication, sort);
         return ResponseEntity.ok(feed);
     }

@@ -41,17 +41,12 @@ public class TopicController {
 
 @PostMapping("/create")
 public ResponseEntity<MessageResponseDTO> createTopic(@RequestBody String rawBody,Authentication authentication,@Valid  @RequestBody TopicCreateDTO dto) {
-    System.out.println("Nom reçu DTO : " + dto.getName());
-    System.out.println("Description reçue DTO : " + dto.getDescription());
-     System.out.println("Nom reçu DTO description : " + dto.getDescription());
-      System.out.println("Raw body : " + rawBody);
      String message= topicService.createTopic(authentication,dto);
     return ResponseEntity.ok(new MessageResponseDTO(message));
 }
 
 @PostMapping("{topicId}/subscribe")
 public ResponseEntity<MessageResponseDTO> subscribeToTopic(@PathVariable Long topicId, Authentication authentication) {
-    System.out.println("Get Name : " + authentication.getName());
    String message= topicService.subscribeUserToTopic(authentication, topicId);
     return ResponseEntity.ok(new MessageResponseDTO(message));
 }
