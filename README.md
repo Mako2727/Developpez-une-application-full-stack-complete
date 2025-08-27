@@ -76,7 +76,7 @@ Tests
 Lancer le front-end
 
     Installer les dépendances : npm install
-    Lancer l'application : npm start
+    Lancer l'application : ng serve
 
 * Application accessible sur : http://localhost:4200
 
@@ -90,30 +90,7 @@ Documentation
 
 Scripts utiles
 
-Back-end
 
-# Compiler et packager
-
-mvn clean install
-
-# Lancer l'application
-
-mvn spring-boot\:run
-
-
-Front-end
-
-# Installer dépendances
-
-npm install
-
-# Lancer le serveur
-
-ng serve 
-
-# Tests unitaires avec Jest
-
-npm run test:jest
 
 
 #  Note
