@@ -1,20 +1,54 @@
-
 <div class="register-container">
   <div class="header-with-back">
     <span class="back-arrow" (click)="goBack()">←</span>
     <h2>Inscription</h2>
   </div>
 
-  <!-- Formulaire réactif -->
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <label for="username">Nom d'utilisateur</label>
-    <input id="username" type="text" placeholder="Entrez votre nom d'utilisateur" formControlName="username" />
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" #f="ngForm">
 
-    <label for="email">Adresse mail</label>
-    <input id="email" type="email" placeholder="Entrez votre adresse mail" formControlName="email" />
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input
+        id="username"
+        type="text"
+        placeholder="Entrez votre nom d'utilisateur"
+        formControlName="username"
+      />
+      <div class="error" *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+        <small *ngIf="registerForm.get('username')?.errors?.['required']">Nom requis.</small>
+        <small *ngIf="registerForm.get('username')?.errors?.['minlength']">Minimum 3 caractères.</small>
+      </div>
+    </div>
 
-    <label for="password">Mot de passe</label>
-    <input id="password" type="password" placeholder="Entrez votre mot de passe" formControlName="password" />
+    <div class="form-group">
+      <label for="email">Adresse mail</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="Entrez votre adresse mail"
+        formControlName="email"
+      />
+      <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+        <small *ngIf="registerForm.get('email')?.errors?.['required']">Email requis.</small>
+        <small *ngIf="registerForm.get('email')?.errors?.['email']">Email invalide.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="Entrez votre mot de passe"
+        formControlName="password"
+      />
+      <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+        <small *ngIf="registerForm.get('password')?.errors?.['required']">Mot de passe requis.</small>
+        <small *ngIf="registerForm.get('password')?.errors?.['pattern']">
+          L'adressse email doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.
+        </small>
+      </div>
+    </div>
 
     <button type="submit" [disabled]="registerForm.invalid">S'inscrire</button>
   </form>

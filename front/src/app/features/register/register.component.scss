@@ -102,3 +102,9 @@ $color-violet-dark: #540a85;
     }
   }
 }
+.error small {
+  color: red;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 2px;
+}
