@@ -24,10 +24,10 @@
   <!-- Section commentaires -->
   <div class="comments-section">
     <h3>Commentaires</h3>
-    <div *ngFor="let comment of article?.comments" class="comment-wrapper">
-      <div class="comment-author">{{ comment.authorName }}</div>
-      <div class="comment-card">{{ comment.content }}</div>
-    </div>
+ <div *ngFor="let comment of article?.comments" class="comment-wrapper">
+  <span class="comment-author">{{ comment.authorName }} :</span>
+  <span class="comment-card">{{ comment.content }}</span>
+</div>
 
     <div class="new-comment-container">
       <textarea
