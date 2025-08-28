@@ -47,7 +47,7 @@ Stack & dépendances
 Tests & couverture
 
 * Les test sont réalisés avec JUNIT
-* Pour lanver les tests : mvn test  
+* Pour lancer les tests : mvn test  
 
 Lancer le back-end
 
@@ -94,6 +94,7 @@ Scripts utiles
 
 
 #  Note
+	initialisation du jeu de données
 Lorsque vous lancerrez l'application pour la premiére fois. 
 JPA contruira la base de données grace à la couche model, une fois cela réalisé, il vous faudra initialiser l'application avec une jeu de test notemment les valeurs des themes.
 Pour cela vous trouverrez dans ressources\sql\scriptInitialisation.sql un script d'initialisation de la base de données.
