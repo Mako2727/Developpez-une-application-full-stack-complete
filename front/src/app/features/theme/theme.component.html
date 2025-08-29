@@ -8,12 +8,13 @@
       <p>{{ theme.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        mat-button
-        (click)="toggleSubscription(theme)"
-        [ngClass]="theme.subscribed ? 'subscribed-btn' : 'unsubscribed-btn'">
-        {{ theme.subscribed ? 'Déjà abonné' : 'S\'abonner' }}
-      </button>
+     <button
+  mat-button
+  (click)="toggleSubscription(theme)"
+  [disabled]="theme.subscribed"
+  [ngClass]="theme.subscribed ? 'subscribed-btn' : 'unsubscribed-btn'">
+  {{ theme.subscribed ? 'Déjà abonné' : 'S\'abonner' }}
+</button>
     </mat-card-actions>
   </mat-card>
 </div>

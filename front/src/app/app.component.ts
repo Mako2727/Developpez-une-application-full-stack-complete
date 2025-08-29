@@ -48,6 +48,10 @@ constructor(
     });
 }
   logOut(): void {
+
+     localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    sessionStorage.clear();
     this.sessionService.logOut();
     this.menuOpen = false; 
     this.router.navigate(['']);     

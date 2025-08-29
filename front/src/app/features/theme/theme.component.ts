@@ -42,9 +42,6 @@ toggleSubscription(theme: Theme): void {
   
 
   theme.subscribed = !currentlySubscribed;
-
-  if (!currentlySubscribed) {
-
     this.themeService.subscribe(theme.id).subscribe({
       next: () => console.log(`Abonné au thème "${theme.id}"`),
       error: (err) => {
@@ -52,15 +49,6 @@ toggleSubscription(theme: Theme): void {
         theme.subscribed = currentlySubscribed; 
       }
     });
-  } else {
-    
-    this.themeService.unsubscribe(theme.id).subscribe({
-      next: () => console.log(`Désabonné du thème "${theme.id}"`),
-      error: (err) => {
-        console.error('Erreur désabonnement', err);
-        theme.subscribed = currentlySubscribed; 
-      }
-    });
-  }
+ 
 }
 }
