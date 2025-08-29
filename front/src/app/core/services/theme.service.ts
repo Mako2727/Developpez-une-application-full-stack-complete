@@ -13,26 +13,20 @@ export class ThemeService {
   constructor(private  httpClient: HttpClient) {}
 
 getThemes(): Observable<Theme[]> {
-  const token = localStorage.getItem('token');
-  const url = `${this.pathService}api/topics`;
-  
-  const headers = new HttpHeaders({'Authorization': `Bearer ${token}`  });
+
 return this.httpClient.get<Theme[]>(`${this.pathService}api/topics`);
 
 }
 
 getAllThemes(): Observable<Theme[]> {
-  const token = localStorage.getItem('token');
-  const url = `${this.pathService}api/topics`;
-  const headers = new HttpHeaders({'Authorization': `Bearer ${token}`  });
+
 return this.httpClient.get<Theme[]>(`${this.pathService}api/topics`);
 
 }
 
 
 subscribe(topicId: number): Observable<MessageResponse> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
 
   const url = `${this.pathService}api/topics/${topicId}/subscribe`; 
 
@@ -41,8 +35,7 @@ subscribe(topicId: number): Observable<MessageResponse> {
 }
 
 unsubscribe(topicId: number): Observable<string> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
 
   const url = `${this.pathService}api/topics/${topicId}`; 
   return this.httpClient.delete<string>(url);
@@ -51,10 +44,8 @@ unsubscribe(topicId: number): Observable<string> {
 
 
 getSubscribedTheme(): Observable<Theme[]> {
-  const token = localStorage.getItem('token');
-  const url = `${this.pathService}api/topics`;
-  
-  const headers = new HttpHeaders({'Authorization': `Bearer ${token}`  });
+
+
 return this.httpClient.get<Theme[]>(`${this.pathService}api/topics/subscribed`);
 
 }

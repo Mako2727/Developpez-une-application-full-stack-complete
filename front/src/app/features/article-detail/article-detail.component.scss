@@ -56,24 +56,25 @@
 
 /* Commentaires */
 .comment-wrapper {
-   display: flex !important;       /* force flex */
-  flex-direction: row !important; /* sur une ligne */
-  align-items: flex-start;
-  gap: 8px;
+  display: flex;
+  flex-direction: center; /* empile auteur + contenu */
   margin-bottom: 15px;
 }
 
 .comment-author {
   font-weight: bold;
-  white-space: nowrap; 
+  margin-right: 8px; /* espace entre auteur et texte */
+  white-space: nowrap; /* évite que le nom passe à la ligne */
 }
 
 .comment-card {
- background: #f5f5f5;
+  background: #f5f5f5;
   padding: 10px 15px;
   border-radius: 8px;
+  text-align: left;
   word-break: break-word;
-  flex: 1;     
+    flex: 1; /* prend toute la largeur dispo */
+  word-wrap: break-word; /* si texte long */
 }
 
 /* Nouveau commentaire */

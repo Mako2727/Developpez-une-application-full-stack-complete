@@ -14,4 +14,5 @@ public class PostDTO {
     private String content;
     private LocalDateTime createdAt;
     private String topicName;
+    private String authorName;
 }

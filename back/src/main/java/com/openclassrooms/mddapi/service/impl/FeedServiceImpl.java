@@ -63,7 +63,8 @@ public class FeedServiceImpl implements FeedService {
                         post.getTitle(),
                         post.getContent(),
                         post.getCreatedAt(),
-                        post.getTopic().getName()
+                        post.getTopic().getName(),
+                        post.getAuthor().getUsername()
                 ))
                 .collect(Collectors.toList());
     }

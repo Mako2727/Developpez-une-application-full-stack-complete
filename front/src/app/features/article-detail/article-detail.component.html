@@ -1,22 +1,22 @@
-<div class="header">
-  <button mat-icon-button class="back-btn" (click)="goBack()">
-    <mat-icon>arrow_back</mat-icon>
-  </button>
-  <h2 class="article-title">{{ article?.title }}</h2>
-</div>
+<div class="main-container" *ngIf="article">
+  <!-- Header -->
+  <div class="header">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="article-title">{{ article.title }}</h2>
+  </div>
 
-<!-- Conteneur principal -->
-<div class="main-container">
   <!-- Infos date, auteur, thème -->
   <div class="info-line">
-    <span class="date">{{ article?.createdAt | date:'short' }}</span>
-    <span class="author">{{ article?.authorName }}</span>
-    <span class="theme">{{ article?.topicName }}</span>
+    <span class="date">{{ article.createdAt | date:'short' }}</span>
+    <span class="author">{{ article.authorName }}</span>
+    <span class="theme">{{ article.topicName }}</span>
   </div>
 
   <!-- Description -->
   <div class="description">
-    <p>{{ article?.content }}</p>
+    <p>{{ article.content }}</p>
   </div>
 
   <hr />
@@ -24,11 +24,12 @@
   <!-- Section commentaires -->
   <div class="comments-section">
     <h3>Commentaires</h3>
- <div *ngFor="let comment of article?.comments" class="comment-wrapper">
-  <span class="comment-author">{{ comment.authorName }} :</span>
-  <span class="comment-card">{{ comment.content }}</span>
-</div>
+    <div *ngFor="let comment of article.comments" class="comment-wrapper">
+      <span class="comment-author">{{ comment.authorName }} :</span>
+      <span class="comment-card">{{ comment.content }}</span>
+    </div>
 
+    <!-- Nouveau commentaire -->
     <div class="new-comment-container">
       <textarea
         [(ngModel)]="newComment"

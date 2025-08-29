@@ -51,7 +51,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
   loadThemes(): void {
-    this.themeService.getThemes().subscribe({
+    this.themeService.getSubscribedTheme().subscribe({
       next: (data: Theme[]) => {
         this.themes = data;
       },

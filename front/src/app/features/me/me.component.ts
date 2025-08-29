@@ -145,9 +145,7 @@ updateProfile(): void {
     }
   });
 }
-  goBack(): void {
-    this.router.navigate(['dashboard']);
-  }
+
 
 
 

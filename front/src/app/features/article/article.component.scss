@@ -47,6 +47,7 @@
   color: gray;
   margin-bottom: 8px;
   width: 100%;
+  gap: 10px; 
 }
 
 .date {
@@ -60,6 +61,10 @@
   white-space: nowrap; /* empêche le retour à la ligne */
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.header-info .date,
+.header-info .author {
+  white-space: nowrap; /* empêche la coupure sur 2 lignes */
 }
 
 /* Responsive : 1 carte par ligne sur mobile */

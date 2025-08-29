@@ -21,7 +21,7 @@ export class ArticleService {
 
 
   getAllArticles(): Observable<postDetail[]> {
-    return this.http.get<postDetail[]>(`${this.pathService}api/posts`);
+    return this.http.get<postDetail[]>(`${this.pathService}api/feed`);
   }
 
 
