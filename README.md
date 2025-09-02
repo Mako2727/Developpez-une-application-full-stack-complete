@@ -76,10 +76,10 @@ UI : Angular Material (14.2.5) + Flex Layout (14.0.0-beta.40) + RxJS (7.5.0)
 
 
 
-Installer les dépendances 
+Installer les dépendances :  
 npm install
     
-Lancer l'application
+Lancer l'application :   
 ng serve
 
 * Application accessible sur : http://localhost:4200
