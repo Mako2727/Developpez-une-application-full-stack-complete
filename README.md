@@ -7,7 +7,7 @@ Application full-stack composée de :
 * Back-end : Spring Boot 
 * Front-end : Angular 
 
-## Fonctionnalités principales
+📦 Fonctionnalités principales
 
 - **Gestion des utilisateurs**
   - Inscription et connexion via e-mail ou nom d’utilisateur et mot de passe.
@@ -27,7 +27,7 @@ Application full-stack composée de :
   - Documentation interactive de tous les endpoints.
   - Test des appels REST directement depuis l’interface Swagger ou postman.
 
-Back-end (Spring Boot)
+🚀Back-end (Spring Boot)
 
 Nom du projet : mdd-api
 Java : 17
@@ -44,14 +44,16 @@ Stack & dépendances
 * Lombok (1.18.34)
 * OpenAPI / Swagger UI (springdoc-openapi-starter-webmvc-ui 2.7.0)
 
-Tests & couverture
+🧪Tests & couverture
 
 * Les test sont réalisés avec JUNIT
 * Pour lancer les tests : mvn test  
 
-Lancer le back-end
 
-mvn clean install
+Installer les dépendances
+mvn clean install  
+
+Lancer le back-end
 mvn spring-boot:run
 
 * API : http://localhost:3001
@@ -59,24 +61,26 @@ mvn spring-boot:run
 
 
 
-Front-end (Angular)
+🚀Front-end (Angular)
 
 Nom du projet : front
 Angular : 14.1.3
 UI : Angular Material (14.2.5) + Flex Layout (14.0.0-beta.40) + RxJS (7.5.0)
 
 
-Tests
+🧪 Tests
 
 * Jest (jest)
 * Pour lancer les tests lancer la commande : npm run test:jest
 
 
 
-Lancer le front-end
 
-    Installer les dépendances : npm install
-    Lancer l'application : ng serve
+Installer les dépendances 
+npm install
+    
+Lancer l'application
+ng serve
 
 * Application accessible sur : http://localhost:4200
 
