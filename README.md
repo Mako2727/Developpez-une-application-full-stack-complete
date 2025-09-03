@@ -50,10 +50,10 @@ Stack & dépendances
 * Pour lancer les tests : mvn test  
 
 
-Installer les dépendances
+Installer les dépendances  : 
 mvn clean install  
 
-Lancer le back-end
+Lancer le back-end  :  
 mvn spring-boot:run
 
 * API : http://localhost:3001
@@ -71,7 +71,8 @@ UI : Angular Material (14.2.5) + Flex Layout (14.0.0-beta.40) + RxJS (7.5.0)
 🧪 Tests
 
 * Jest (jest)
-* Pour lancer les tests lancer la commande : npm run test:jest
+* Pour lancer les tests lancer la commande :  
+npm run test:jest
 
 
 
