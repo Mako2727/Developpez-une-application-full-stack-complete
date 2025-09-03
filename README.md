@@ -47,7 +47,8 @@ Stack & dépendances
 🧪Tests & couverture
 
 * Les test sont réalisés avec JUNIT
-* Pour lancer les tests : mvn test  
+* Pour lancer les tests : 
+mvn test  
 
 
 Installer les dépendances  : 
@@ -91,7 +92,7 @@ Authentification
 
 Documentation
 
-* API documentée via Swagger UI :http://localhost:8080/swagger-ui/index.html
+* API documentée via Swagger UI :http://localhost:3001/swagger-ui/index.html
 
 Scripts utiles
 
